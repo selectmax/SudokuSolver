@@ -7,45 +7,26 @@
     android:paddingLeft="0dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id11"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                style="@style/CommonEditText"
                 />
             <EditText
                 android:id="@+id/id12"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                style="@style/CommonEditText"
                 />
             <EditText
                 android:id="@+id/id13"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                style="@style/CommonEditText"
                 />
             <EditText
                 android:id="@+id/id14"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                style="@style/CommonEditText"
                 />
             <EditText
                 android:id="@+id/id15"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                style="@style/CommonEditText"
                 />
             <EditText
                 android:id="@+id/id16"
@@ -56,527 +37,269 @@
                 />
             <EditText
                 android:id="@+id/id17"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                style="@style/CommonEditText"
                 />
             <EditText
                 android:id="@+id/id18"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+                style="@style/CommonEditText"
                 />
             <EditText
                 android:id="@+id/id19"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/CommonEditText" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id21"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id22"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id23"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id24"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id25"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id26"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id27"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id28"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id29"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id31"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id32"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id33"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id34"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id35"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id36"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id37"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id38"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id39"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id41"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id42"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id43"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id44"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id45"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id46"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id47"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id48"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id49"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id51"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id52"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id53"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id54"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id55"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id56"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id57"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id58"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id59"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id61"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id62"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id63"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id64"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id65"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id66"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id67"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id68"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id69"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id71"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id72"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id73"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id74"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id75"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id76"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id77"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id78"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id79"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id81"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id82"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id83"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id84"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id85"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id86"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id87"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id88"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id89"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        style="@style/RowOfEditText">
             <EditText
                 android:id="@+id/id91"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id92"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id93"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id94"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id95"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id96"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id97"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id98"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
             <EditText
                 android:id="@+id/id99"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                style="@style/CommonEditText"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/push_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/push"/>
+        style="@style/ButtonStyle"
+        />
 
 </LinearLayout>
 

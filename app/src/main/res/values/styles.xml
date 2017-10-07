@@ -8,4 +8,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name = "CommonEditText">
+        <item name = "android:textSize">15sp</item>
+        <item name = "android:layout_width">0dp</item>
+        <item name = "android:layout_weight">1</item>
+        <item name = "android:layout_height">wrap_content</item>
+    </style>
+
+    <style name = "RowOfEditText">
+        <item name = "android:layout_width">match_parent</item>
+        <item name = "android:layout_height">wrap_content</item>
+        <item name = "android:orientation">horizontal</item>
+        <item name = "android:paddingLeft">10dp</item>
+        <item name = "android:paddingRight">10dp</item>
+    </style>
+
+    <style name = "ButtonStyle">
+        <item name = "android:layout_width">match_parent</item>
+        <item name = "android:layout_height">wrap_content</item>
+        <item name = "android:text">@string/push</item>
+    </style>
+
 </resources>
