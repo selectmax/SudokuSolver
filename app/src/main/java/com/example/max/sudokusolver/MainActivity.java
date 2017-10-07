@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
+
                 algoritm.setByteMass(mass);
                 mass = algoritm.getSortMass();
 
