@@ -132,10 +132,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-
-
-                algoritm.setByteMass(mass);
-                mass = algoritm.getSortMass();
+                mass = algoritm.solveMass(mass);
+                //mass = Algoritm2.solveSudoku(mass);
 
                 //вывод полученной матрицы на экран
                 for (byte i = 1; i <= 9; i++ ) {
