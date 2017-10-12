@@ -11,7 +11,7 @@ class Algoritm2 {
 
     private char[][] board;
 
-    public static Byte[][] solveSudoku(Byte[][] board) {
+    public Byte[][] solveSudoku(Byte[][] board) {
         char[][] board2 = new char[10][10];
         for (int i = 1; i < 10; i++) {
             for (int j = 1; j < 10; j++) {
@@ -28,7 +28,7 @@ class Algoritm2 {
         return newSudoku;
     }
 
-    public static boolean solve(char[][] board){
+    public boolean solve(char[][] board){
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
                 if(board[i][j]!='.')
@@ -48,7 +48,7 @@ class Algoritm2 {
         return true; // does not matter
     }
 
-    public static boolean isValid(char[][] board, int i, int j){
+    public boolean isValid(char[][] board, int i, int j){
         HashSet<Character> set = new HashSet<Character>();
 
         for(int k=0; k<9; k++){

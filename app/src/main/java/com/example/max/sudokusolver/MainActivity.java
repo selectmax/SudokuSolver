@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -22,8 +23,12 @@ public class MainActivity extends AppCompatActivity {
     private Byte[][] mass;
     private EditText[][] massEditText;
     private Button pushButton;
-    private Algoritm algoritm;
+  //  private Algoritm algoritm;
     private Byte[][] sortMass;
+    private Algoritm2 algoritm2;
+    private Algorithm3 algorithm3;
+    private int[] massOdn;
+    private int z;
 
 
 
@@ -33,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         pushButton = (Button) findViewById(R.id.push_button);
-        algoritm = new Algoritm();
+     //   algoritm = new Algoritm();
+        algoritm2 = new Algoritm2();
+        algorithm3 = new Algorithm3();
         mass = new Byte[10][10];
+        massOdn = new int[81];
         {
             massEditText = new EditText[10][10];
             massEditText[0][0] = null;
@@ -132,14 +140,35 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                mass = algoritm.solveMass(mass);
-                //mass = Algoritm2.solveSudoku(mass);
+                //mass = algoritm.solveMass(mass);
+                //mass = algoritm2.solveSudoku(mass);
 
-                //вывод полученной матрицы на экран
-                for (byte i = 1; i <= 9; i++ ) {
-                    for (byte j = 1; j <= 9; j++) massEditText[i][j].setText(mass[i][j].toString());
+                if (algorithm3.IsEnterValid(mass)) {
+                    z = 0;
+                    for (byte i = 1; i <= 9; i++) {
+                        for (byte j = 1; j <= 9; j++) {
+                            massOdn[z] = mass[i][j];
+                            z++;
+                        }
+                    }
+
+                    boolean issolved = algorithm3.solve(massOdn);
+                    if (issolved) {
+                        massOdn = algorithm3.getMassInt();
+                        for (int i = 0; i < 81; i++) {
+                            mass[i / 9 + 1][i % 9 + 1] = Byte.valueOf(String.valueOf(massOdn[i]));
+                        }
+                    } else {
+                        Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
+                    }
+
+                    //вывод полученной матрицы на экран
+                    for (byte i = 1; i <= 9; i++) {
+                        for (byte j = 1; j <= 9; j++)
+                            massEditText[i][j].setText(mass[i][j].toString());
+                    }
                 }
-
+                else Toast.makeText(MainActivity.this, "Invalid input2", Toast.LENGTH_SHORT).show();
             }
         });
 
