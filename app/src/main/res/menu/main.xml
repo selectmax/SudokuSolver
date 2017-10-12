@@ -6,7 +6,6 @@
         android:icon="@drawable/ic_clear_black_24dp"
         app:showAsAction="always|withText"
         android:title="@string/ButtonClear"
-        android:fillColor="#932e2e"
         >
     </item>
 </menu>
