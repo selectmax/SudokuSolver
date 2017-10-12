@@ -2,6 +2,9 @@ package com.example.max.sudokusolver;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,15 +25,13 @@ public class MainActivity extends AppCompatActivity {
                      e91, e92, e93, e94, e95, e96, e97, e98, e99;
     private Byte[][] mass;
     private EditText[][] massEditText;
-    private Button pushButton;
+    private Button pushButton, clearButton;
   //  private Algoritm algoritm;
     private Byte[][] sortMass;
     private Algoritm2 algoritm2;
     private Algorithm3 algorithm3;
     private int[] massOdn;
     private int z;
-
-
 
 
     @Override
@@ -128,7 +129,10 @@ public class MainActivity extends AppCompatActivity {
             massEditText[9][8] = (EditText) findViewById(R.id.id98);
             massEditText[9][9] = (EditText) findViewById(R.id.id99);
         }
+
+
         pushButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 for (byte i = 1; i <= 9; i++ ) {
@@ -171,7 +175,29 @@ public class MainActivity extends AppCompatActivity {
                 else Toast.makeText(MainActivity.this, "Invalid input2", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.ButtonClear:
+            {
+                for (byte i = 1; i <= 9; i++ ) {
+                    for (byte j = 1; j <= 9; j++) {
+                        massEditText[i][j].setText("");
+                    }}
+
+            }
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
