@@ -4,14 +4,21 @@
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="0dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:background="@color/colorPrimary">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="365dp"
+    android:orientation="vertical"
+    android:paddingTop="6dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:background="@drawable/bg1">
 
     <LinearLayout
         style="@style/RowOfEditText">
@@ -300,11 +307,78 @@
                 style="@style/CommonEditText"/>
     </LinearLayout>
 
-
+</LinearLayout>
     <Button
         android:id="@+id/push_button"
         style="@style/ButtonStyle"
         />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/colorPrimary">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@color/colorPrimary">
+                        <Button
+                            android:id="@+id/btn1"
+                            style="@style/btn"
+                            android:background="@drawable/i1">
+                        </Button>
+                        <Button
+                            android:id="@+id/btn2"
+                            style="@style/btn"
+                            android:background="@drawable/i2">
+                        </Button>
+                        <Button
+                            android:id="@+id/btn3"
+                            style="@style/btn"
+                            android:background="@drawable/i3">
+                        </Button>
+                        <Button
+                            android:id="@+id/btn4"
+                            style="@style/btn"
+                            android:background="@drawable/i4">
+                        </Button>
+                        <Button
+                            android:id="@+id/btn5"
+                            style="@style/btn"
+                            android:background="@drawable/i5">
+                        </Button>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@color/colorPrimary">
+                        <Button
+                            android:id="@+id/btn6"
+                            style="@style/btn"
+                            android:background="@drawable/i6">
+                        </Button>
+                        <Button
+                            android:id="@+id/btn7"
+                            style="@style/btn"
+                            android:background="@drawable/i7">
+                        </Button>
+                        <Button
+                            android:id="@+id/btn8"
+                            style="@style/btn"
+                            android:background="@drawable/i8">
+                        </Button>
+                        <Button
+                            android:id="@+id/btn9"
+                            style="@style/btn"
+                            android:background="@drawable/i9">
+                        </Button>
+                </LinearLayout>
+        </LinearLayout>
+
 
 </LinearLayout>
 </ScrollView>
