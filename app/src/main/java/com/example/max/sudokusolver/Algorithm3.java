@@ -1,5 +1,8 @@
 package com.example.max.sudokusolver;
 
+import android.view.View;
+import android.widget.ListAdapter;
+
 /**
  * Created by max on 11.10.2017.
  */
@@ -142,4 +145,5 @@ public class Algorithm3 {
     public void setMassInt(int[] massInt) {
         this.massInt = massInt;
     }
+
 }
