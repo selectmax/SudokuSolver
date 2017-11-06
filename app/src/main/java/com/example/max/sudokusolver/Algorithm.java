@@ -5,9 +5,9 @@ package com.example.max.sudokusolver;
  */
 
 public class Algorithm {
-    private int[] massInt;
+    private Integer[] massInt;
 
-    public boolean solve(int[] puzzle){
+    public boolean solve(Integer[] puzzle){
 
         int N = (int) Math.round(Math.pow(puzzle.length, 0.25d)); // length ^ 0.25
         int SIZE = N * N;
@@ -58,7 +58,7 @@ public class Algorithm {
         return false;
     }
 
-    public boolean IsEnterValid (Byte[][] mass) {
+    public boolean IsEnterValid (Integer[][] mass) {
         for (byte i = 1; i <= 9; i++ ) {
             for (byte j = 1; j <= 9; j++) {
                 if (mass[i][j] != 0) {
@@ -135,11 +135,11 @@ public class Algorithm {
     }
 
 
-    public int[] getMassInt() {
+    public Integer[] getMassInt() {
         return massInt;
     }
 
-    public void setMassInt(int[] massInt) {
+    public void setMassInt(Integer[] massInt) {
         this.massInt = massInt;
     }
 

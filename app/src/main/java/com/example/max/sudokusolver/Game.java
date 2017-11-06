@@ -2,15 +2,13 @@ package com.example.max.sudokusolver;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.database.DataSetObserver;
-import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by max on 19.10.2017.
@@ -19,14 +17,16 @@ import java.util.ArrayList;
 class Game extends BaseAdapter {
 
     private Context mContext;
-    private final Integer mRows=9, mCols=9;
+    private final int mRows=9, mCols=9;
     private int numberArray[][] = new int[mRows][mCols];
     private Resources mRes;
+    private ArrayList<Integer> baseMass;
     private ArrayList<String> arrPict;
 
-    public Game(Context mContext) {
+    public Game(Context mContext, Integer[] massSolved) {
         this.mContext = mContext;
         arrPict = new ArrayList<>(mCols*mRows);
+        baseMass = new ArrayList<Integer>(Arrays.asList(massSolved));
     }
 
 
@@ -37,7 +37,11 @@ class Game extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return baseMass.get(i);
+    }
+
+    public void setItem(int index, Integer value){
+        baseMass.set(index, value);
     }
 
     @Override
@@ -47,17 +51,24 @@ class Game extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        ImageView imageView;
+        //ImageView imageView;
+        TextView textView;
         if (view == null){
-            imageView = new ImageView(mContext);
+            textView = new TextView(mContext);
+           // textView.setLayoutParams(new GridView.LayoutParams(200, 200));
+            textView.setPadding(8,15, 8, 15);
+            textView.setTextSize(25);
         }
         else {
-            imageView = (ImageView) view;
+            textView = (TextView) view;
         }
 
-        Integer drawableId = mRes.getIdentifier(arrPict.get(position), "drawable", mContext.getPackageName());
-        imageView.setImageResource(drawableId);
-        return imageView;
+        textView.setText(baseMass.get(position).toString());
+       // Integer drawableId = mRes.getIdentifier(arrPict.get(position), "drawable", mContext.getPackageName());
+       // imageView.setImageResource(drawableId);
+       // Integer drawableId = mRes.getIdentifier(String.valueOf(baseMass.get(position)), "drawable", mContext.getPackageName());
+       // imageView.setImageResource(drawableId);
+        return textView;
     }
 
    public int getRow(int position){

@@ -16,14 +16,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private GridView mGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
-    private Byte[][] mass;
+    private Integer[][] mass;
     private EditText[][] massEditText;
     private Button pushButton, clearButton;
-    private Byte[][] sortMass;
     private Algorithm mAlgorithm;
-    private int[] massOdn;
+    private Integer[] massSolved; //массив который передается и возвращается алгоритмом
     private int z;
-    public String selectedButton;
+    public Integer selectedButton;
     private Game mGame;
 
 
@@ -32,6 +31,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solver);
         getUIItems();
+        setOnClickListener();
+
+        massSolved = new Integer[81];
+
+        for (int i = 0; i < massSolved.length; i ++){
+            massSolved[i] = 0;
+        }
+
+        mGame = new Game(this, massSolved);
 
         mGridView.setNumColumns(9);
         mGridView.setEnabled(true);
@@ -43,14 +51,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Сделать поле выделенным
 
             // Ждать клика на одну из цифр btn1-btn9
+                onClick(view);
+                mGame.setItem(position, selectedButton);
 
-
+                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
             }
         });
 
         mAlgorithm = new Algorithm();
-        mass = new Byte[10][10];
-        massOdn = new int[81];
+        mass = new Integer[10][10];
+        massSolved = new Integer[81];
 
 
         pushButton.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for (byte i = 1; i <= 9; i++ ) {
                     for (byte j = 1; j <= 9; j++) {
                         if (!massEditText[i][j].getText().toString().equals("")) {
-                            mass[i][j] = Byte.valueOf(massEditText[i][j].getText().toString());
+                            mass[i][j] = Integer.valueOf(massEditText[i][j].getText().toString());
                         } else mass[i][j] = 0;
 
                     }
@@ -70,16 +80,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     z = 0;
                     for (byte i = 1; i <= 9; i++) {
                         for (byte j = 1; j <= 9; j++) {
-                            massOdn[z] = mass[i][j];
+                            massSolved[z] = mass[i][j];
                             z++;
                         }
                     }
 
-                    boolean issolved = mAlgorithm.solve(massOdn);
+                    boolean issolved = mAlgorithm.solve(massSolved);
                     if (issolved) {
-                        massOdn = mAlgorithm.getMassInt();
+                        massSolved = mAlgorithm.getMassInt();
                         for (int i = 0; i < 81; i++) {
-                            mass[i / 9 + 1][i % 9 + 1] = Byte.valueOf(String.valueOf(massOdn[i]));
+                            mass[i / 9 + 1][i % 9 + 1] = Integer.valueOf(Byte.valueOf(String.valueOf(massSolved[i])));
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
@@ -126,23 +136,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick (View view){
         switch(view.getId()){
-            case R.id.btn1: selectedButton = "n1";
+            case R.id.btn1: selectedButton = 1;
                 break;
-            case R.id.btn2: selectedButton = "n2";
+            case R.id.btn2: selectedButton = 2;
                 break;
-            case R.id.btn3: selectedButton = "n3";
+            case R.id.btn3: selectedButton = 3;
                 break;
-            case R.id.btn4: selectedButton = "n4";
+            case R.id.btn4: selectedButton = 4;
                 break;
-            case R.id.btn5: selectedButton = "n5";
+            case R.id.btn5: selectedButton = 5;
                 break;
-            case R.id.btn6: selectedButton = "n6";
+            case R.id.btn6: selectedButton = 6;
                 break;
-            case R.id.btn7: selectedButton = "n7";
+            case R.id.btn7: selectedButton = 7;
                 break;
-            case R.id.btn8: selectedButton = "n8";
+            case R.id.btn8: selectedButton = 8;
                 break;
-            case R.id.btn9: selectedButton = "n9";
+            case R.id.btn9: selectedButton = 9;
                 break;
 
         }
