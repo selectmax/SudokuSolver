@@ -36,12 +36,13 @@ class Game extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public Integer getItem(int i) {
         return baseMass.get(i);
     }
 
     public void setItem(int index, Integer value){
         baseMass.set(index, value);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -49,25 +50,31 @@ class Game extends BaseAdapter {
         return 0;
     }
 
+    public ArrayList<Integer> getBaseMass() {
+        return baseMass;
+    }
+
+    public void setBaseMass(Integer[] baseMass) {
+        for (int i = 0; i < baseMass.length; i++){
+            this.baseMass.set(i, baseMass[i]);
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        //ImageView imageView;
         TextView textView;
         if (view == null){
             textView = new TextView(mContext);
-           // textView.setLayoutParams(new GridView.LayoutParams(200, 200));
-            textView.setPadding(8,15, 8, 15);
-            textView.setTextSize(25);
+            textView.setPadding(12,6, 6, 12); // настройка отступов между ячейками
+            textView.setTextSize(25); // величина шрифта
         }
         else {
             textView = (TextView) view;
         }
 
         textView.setText(baseMass.get(position).toString());
-       // Integer drawableId = mRes.getIdentifier(arrPict.get(position), "drawable", mContext.getPackageName());
-       // imageView.setImageResource(drawableId);
-       // Integer drawableId = mRes.getIdentifier(String.valueOf(baseMass.get(position)), "drawable", mContext.getPackageName());
-       // imageView.setImageResource(drawableId);
+
         return textView;
     }
 

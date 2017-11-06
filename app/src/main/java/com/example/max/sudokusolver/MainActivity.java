@@ -1,7 +1,7 @@
 package com.example.max.sudokusolver;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Algorithm mAlgorithm;
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
     private int z;
-    public Integer selectedButton;
+    public Integer selectedButton = 1;
     private Game mGame;
 
 
@@ -33,12 +32,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getUIItems();
         setOnClickListener();
 
+        // пока Integer, но хочется перевести в String и убрать нули
         massSolved = new Integer[81];
-
-        for (int i = 0; i < massSolved.length; i ++){
+        for (int i = 0; i < massSolved.length; i ++) {
             massSolved[i] = 0;
         }
-
         mGame = new Game(this, massSolved);
 
         mGridView.setNumColumns(9);
@@ -48,25 +46,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //Сделать поле выделенным
-
-            // Ждать клика на одну из цифр btn1-btn9
-                onClick(view);
+                /**
+                 * Мне пока не нравится как работает, но работает так:
+                 * сначала нажимаешь цифру которую хочешь вставить, потом нажимаешь поле и цифра вставляется
+                 */
                 mGame.setItem(position, selectedButton);
-
-                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
             }
         });
 
         mAlgorithm = new Algorithm();
         mass = new Integer[10][10];
-        massSolved = new Integer[81];
 
 
         pushButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+
+                for (int i = 0; i < 81; i++){
+                    massSolved[i] = mGame.getItem(i);
+                }
+
+                /**
+                 * Можешь прикинуть проверки эти? что-то я в них утонул
+                 * после этого for в massSolved лежит массив считанный с экрана
+                 * может и не надо его в матрицу превращать? а просто в методе проверки его в матрицу превратить
+                 * если сильно нужно?
+                 */
+
+                /*
+
                 for (byte i = 1; i <= 9; i++ ) {
                     for (byte j = 1; j <= 9; j++) {
                         if (!massEditText[i][j].getText().toString().equals("")) {
@@ -101,9 +110,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             massEditText[i][j].setText(mass[i][j].toString());
                     }
                 }
-                else Toast.makeText(MainActivity.this, "Invalid input2", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(MainActivity.this, "Invalid input2", Toast.LENGTH_SHORT).show(); */
+
+                mAlgorithm.solve(massSolved);
+                mGame.setBaseMass(mAlgorithm.getMassInt());
             }
         });
+
     }
 
     private void getUIItems(){
@@ -158,6 +171,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     *
+     * @param menu
+     * @return
+     *
+     * это задатки меню?)
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
