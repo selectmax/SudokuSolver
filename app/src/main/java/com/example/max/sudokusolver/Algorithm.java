@@ -1,13 +1,10 @@
 package com.example.max.sudokusolver;
 
-import android.view.View;
-import android.widget.ListAdapter;
-
 /**
  * Created by max on 11.10.2017.
  */
 
-public class Algorithm3 {
+public class Algorithm {
     private int[] massInt;
 
     public boolean solve(int[] puzzle){

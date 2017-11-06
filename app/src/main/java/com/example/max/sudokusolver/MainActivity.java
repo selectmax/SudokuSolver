@@ -12,8 +12,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import java.util.Arrays;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GridView mGridView;
@@ -22,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText[][] massEditText;
     private Button pushButton, clearButton;
     private Byte[][] sortMass;
-    private Algorithm3 algorithm3;
+    private Algorithm mAlgorithm;
     private int[] massOdn;
     private int z;
     public String selectedButton;
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        algorithm3 = new Algorithm3();
+        mAlgorithm = new Algorithm();
         mass = new Byte[10][10];
         massOdn = new int[81];
 
@@ -68,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
 
-                if (algorithm3.IsEnterValid(mass)) {
+                if (mAlgorithm.IsEnterValid(mass)) {
                     z = 0;
                     for (byte i = 1; i <= 9; i++) {
                         for (byte j = 1; j <= 9; j++) {
@@ -77,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
 
-                    boolean issolved = algorithm3.solve(massOdn);
+                    boolean issolved = mAlgorithm.solve(massOdn);
                     if (issolved) {
-                        massOdn = algorithm3.getMassInt();
+                        massOdn = mAlgorithm.getMassInt();
                         for (int i = 0; i < 81; i++) {
                             mass[i / 9 + 1][i % 9 + 1] = Byte.valueOf(String.valueOf(massOdn[i]));
                         }
