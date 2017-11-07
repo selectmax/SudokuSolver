@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /**
-                 * Мне пока не нравится как работает, но работает так:
-                 * сначала нажимаешь цифру которую хочешь вставить, потом нажимаешь поле и цифра вставляется
+                 * Мне так не нравится, убого и не нативно, если сначала выбираешь цифру, а потом ставишь
                  */
                 mGame.setItem(position, selectedButton);
             }
@@ -170,14 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
-    /**
-     *
-     * @param menu
-     * @return
-     *
-     * это задатки меню?)
-     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
