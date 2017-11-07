@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (mAlgorithm.IsEnterValid(massSolved)) {
                     mAlgorithm.solve(massSolved);
                     mGame.setBaseMass(mAlgorithm.getMassInt());}
-                else Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();;
+                else Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn9: selectedButton = 9;
                 break;
-
         }
     }
 
