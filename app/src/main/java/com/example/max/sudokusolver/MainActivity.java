@@ -2,6 +2,7 @@ package com.example.max.sudokusolver;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,7 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getUIItems();
         setOnClickListener();
 
-        // пока Integer, но хочется перевести в String и убрать нули
+        /**
+         * Не вижу смысла в String. Мне Integer нравится, а лучше вообще Byte сделать.
+         * Но где-то в коде вроде столкнемся, что какой-то метод будет ожидать Integer, а мы ему Byte будем давать. Поэтому пока так
+         */
+
         massSolved = new Integer[81];
         for (int i = 0; i < massSolved.length; i ++) {
             massSolved[i] = 0;
@@ -47,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /**
-                 * Мне так не нравится, убого и не нативно, если сначала выбираешь цифру, а потом ставишь
+                 * Мне так не нравится. Все-таки сначала должно выбираться поле, а потом уже число...
                  */
                 mGame.setItem(position, selectedButton);
             }
@@ -62,57 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
 
-                for (int i = 0; i < 81; i++){
-                    massSolved[i] = mGame.getItem(i);
-                }
-
-                /**
-                 * Можешь прикинуть проверки эти? что-то я в них утонул
-                 * после этого for в massSolved лежит массив считанный с экрана
-                 * может и не надо его в матрицу превращать? а просто в методе проверки его в матрицу превратить
-                 * если сильно нужно?
-                 */
-
-                /*
-
-                for (byte i = 1; i <= 9; i++ ) {
-                    for (byte j = 1; j <= 9; j++) {
-                        if (!massEditText[i][j].getText().toString().equals("")) {
-                            mass[i][j] = Integer.valueOf(massEditText[i][j].getText().toString());
-                        } else mass[i][j] = 0;
-
-                    }
-                }
-
-                if (mAlgorithm.IsEnterValid(mass)) {
-                    z = 0;
-                    for (byte i = 1; i <= 9; i++) {
-                        for (byte j = 1; j <= 9; j++) {
-                            massSolved[z] = mass[i][j];
-                            z++;
-                        }
-                    }
-
-                    boolean issolved = mAlgorithm.solve(massSolved);
-                    if (issolved) {
-                        massSolved = mAlgorithm.getMassInt();
-                        for (int i = 0; i < 81; i++) {
-                            mass[i / 9 + 1][i % 9 + 1] = Integer.valueOf(Byte.valueOf(String.valueOf(massSolved[i])));
-                        }
-                    } else {
-                        Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
-                    }
-
-                    //вывод полученной матрицы на экран
-                    for (byte i = 1; i <= 9; i++) {
-                        for (byte j = 1; j <= 9; j++)
-                            massEditText[i][j].setText(mass[i][j].toString());
-                    }
-                }
-                else Toast.makeText(MainActivity.this, "Invalid input2", Toast.LENGTH_SHORT).show(); */
-
-                mAlgorithm.solve(massSolved);
-                mGame.setBaseMass(mAlgorithm.getMassInt());
+                for (int i = 0; i < 81; i++) massSolved[i] = mGame.getItem(i);
+                if (mAlgorithm.IsEnterValid(massSolved)) {
+                    mAlgorithm.solve(massSolved);
+                    mGame.setBaseMass(mAlgorithm.getMassInt());}
+                else Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();;
             }
         });
 
@@ -169,6 +129,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+
+    /**
+     *
+     * @param menu
+     * @return
+     *
+     * это задатки меню?)
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
