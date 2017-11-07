@@ -103,4 +103,5 @@ public class Algorithm {
         this.massInt = massInt;
     }
 
+
 }

@@ -130,14 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /**
-     *
-     * @param menu
-     * @return
-     *
-     * это задатки меню?)
-     */
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -148,14 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.ButtonClear:
-            {
-                for (byte i = 1; i <= 9; i++ ) {
-                    for (byte j = 1; j <= 9; j++) {
-                        massEditText[i][j].setText("");
-                    }}
-
-            }
+            case R.id.ButtonClear: mGame.cleanMassInt();
                 return true;
         }
 

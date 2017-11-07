@@ -61,6 +61,13 @@ class Game extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void cleanMassInt() {
+        for (int i = 0; i < 81; i++){
+            this.baseMass.set(i, 0);
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         TextView textView;
