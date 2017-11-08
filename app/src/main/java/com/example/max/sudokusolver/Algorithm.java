@@ -88,7 +88,6 @@ public class Algorithm {
         else return startOfSquare;
     }
 
-
     public Integer[] getMassInt() {
         return massInt;
     }
