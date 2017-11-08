@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -18,11 +17,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GridView mGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Integer[][] mass;
-    private EditText[][] massEditText;
-    private Button pushButton, clearButton;
+    private Button pushButton;
     private Algorithm mAlgorithm;
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
-    private int z;
     public Integer selectedButton = 1;
     private Game mGame;
 
@@ -73,6 +70,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mAlgorithm.solve(massSolved);
                     mGame.setBaseMass(mAlgorithm.getMassInt());}
                 else Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btn1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Algorithm p = new Algorithm();
+                for (int i=0; i <=80; i++) {
+                    Log.i("MyTag", i + " " + String.valueOf(p.whereIsStartOfSquare(i)));
+                }
+                return false;
             }
         });
 

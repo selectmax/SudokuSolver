@@ -80,18 +80,12 @@ public class Algorithm {
     }
 
 
-    private int whereIsStartOfSquare(int start) {
+    public int whereIsStartOfSquare(int start) {
         int startOfSquare = (start / 3) * 3;
-        if (startOfSquare == 18 || startOfSquare == 9 || startOfSquare == 0) return 0;
-        else if (startOfSquare == 3 || startOfSquare == 12 || startOfSquare == 21) return 3;
-        else if (startOfSquare == 6 || startOfSquare == 15 || startOfSquare == 24) return 6;
-        else if (startOfSquare == 27 || startOfSquare == 36 || startOfSquare == 45) return 27;
-        else if (startOfSquare == 30 || startOfSquare == 39 || startOfSquare == 48) return 30;
-        else if (startOfSquare == 33 || startOfSquare == 42 || startOfSquare == 51) return 33;
-        else if (startOfSquare == 54 || startOfSquare == 63 || startOfSquare == 72) return 54;
-        else if (startOfSquare == 57 || startOfSquare == 66 || startOfSquare == 75) return 57;
-        else if (startOfSquare == 60 || startOfSquare == 69 || startOfSquare == 78) return 60;
-        return 0;
+        start = startOfSquare / 9;
+        if (start == 2 || start == 5 || start == 8) return (startOfSquare-18);
+        else if (start == 1 || start == 4 || start == 7) return (startOfSquare-9);
+        else return startOfSquare;
     }
 
 
