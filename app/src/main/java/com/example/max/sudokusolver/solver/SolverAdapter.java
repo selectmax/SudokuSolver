@@ -1,4 +1,4 @@
-package com.example.max.sudokusolver;
+package com.example.max.sudokusolver.solver;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,7 +14,7 @@ import java.util.Arrays;
  * Created by max on 19.10.2017.
  */
 
-class Game extends BaseAdapter {
+class SolverAdapter extends BaseAdapter {
 
     private Context mContext;
     private final int mRows=9, mCols=9;
@@ -23,7 +23,7 @@ class Game extends BaseAdapter {
     private ArrayList<Integer> baseMass;
     private ArrayList<String> arrPict;
 
-    public Game(Context mContext, Integer[] massSolved) {
+    public SolverAdapter(Context mContext, Integer[] massSolved) {
         this.mContext = mContext;
         arrPict = new ArrayList<>(mCols*mRows);
         baseMass = new ArrayList<Integer>(Arrays.asList(massSolved));

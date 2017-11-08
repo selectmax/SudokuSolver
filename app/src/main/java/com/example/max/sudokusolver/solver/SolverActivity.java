@@ -1,18 +1,18 @@
-package com.example.max.sudokusolver;
+package com.example.max.sudokusolver.solver;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import com.example.max.sudokusolver.Algorithm;
+import com.example.max.sudokusolver.R;
+
+public class SolverActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GridView mGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Algorithm mAlgorithm;
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
     public Integer selectedButton = 1;
-    private Game mGame;
+    private SolverAdapter mSolverAdapter;
 
 
     @Override
@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < massSolved.length; i ++) {
             massSolved[i] = 0;
         }
-        mGame = new Game(this, massSolved);
+        mSolverAdapter = new SolverAdapter(this, massSolved);
 
         mGridView.setNumColumns(9);
         mGridView.setEnabled(true);
-        mGridView.setAdapter(mGame);
+        mGridView.setAdapter(mSolverAdapter);
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 /**
                  * Мне так не нравится. Все-таки сначала должно выбираться поле, а потом уже число...
                  */
-                mGame.setItem(position, selectedButton);
+                mSolverAdapter.setItem(position, selectedButton);
             }
         });
 
@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
 
-                for (int i = 0; i < 81; i++) massSolved[i] = mGame.getItem(i);
+                for (int i = 0; i < 81; i++) massSolved[i] = mSolverAdapter.getItem(i);
                 if (mAlgorithm.IsEnterValid(massSolved)) {
                     mAlgorithm.solve(massSolved);
-                    mGame.setBaseMass(mAlgorithm.getMassInt());}
-                else Toast.makeText(MainActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
+                    mSolverAdapter.setBaseMass(mAlgorithm.getMassInt());}
+                else Toast.makeText(SolverActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        switch (item.getItemId()) {
-//            case R.id.ButtonClear: mGame.cleanMassInt();
+//            case R.id.ButtonClear: mSolverAdapter.cleanMassInt();
 //                return true;
 //        }
 //        return super.onOptionsItemSelected(item);
