@@ -21,7 +21,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     private Algorithm mAlgorithm;
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
     public Integer selectedButton = 1;
-    private SolverAdapter mSolverAdapter;
+    private AdapterSolver mAdapterSolver;
 
 
     @Override
@@ -40,11 +40,11 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         for (int i = 0; i < massSolved.length; i ++) {
             massSolved[i] = 0;
         }
-        mSolverAdapter = new SolverAdapter(this, massSolved);
+        mAdapterSolver = new AdapterSolver(this, massSolved);
 
         mGridView.setNumColumns(9);
         mGridView.setEnabled(true);
-        mGridView.setAdapter(mSolverAdapter);
+        mGridView.setAdapter(mAdapterSolver);
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
                 /**
                  * Мне так не нравится. Все-таки сначала должно выбираться поле, а потом уже число...
                  */
-                mSolverAdapter.setItem(position, selectedButton);
+                mAdapterSolver.setItem(position, selectedButton);
             }
         });
 
@@ -65,10 +65,10 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view) {
 
-                for (int i = 0; i < 81; i++) massSolved[i] = mSolverAdapter.getItem(i);
+                for (int i = 0; i < 81; i++) massSolved[i] = mAdapterSolver.getItem(i);
                 if (mAlgorithm.IsEnterValid(massSolved)) {
                     mAlgorithm.solve(massSolved);
-                    mSolverAdapter.setBaseMass(mAlgorithm.getMassInt());}
+                    mAdapterSolver.setBaseMass(mAlgorithm.getMassInt());}
                 else Toast.makeText(SolverActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
             }
         });
@@ -148,7 +148,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        switch (item.getItemId()) {
-//            case R.id.ButtonClear: mSolverAdapter.cleanMassInt();
+//            case R.id.ButtonClear: mAdapterSolver.cleanMassInt();
 //                return true;
 //        }
 //        return super.onOptionsItemSelected(item);

@@ -14,7 +14,7 @@ import java.util.Arrays;
  * Created by max on 19.10.2017.
  */
 
-class SolverAdapter extends BaseAdapter {
+class AdapterSolver extends BaseAdapter {
 
     private Context mContext;
     private final int mRows=9, mCols=9;
@@ -23,7 +23,7 @@ class SolverAdapter extends BaseAdapter {
     private ArrayList<Integer> baseMass;
     private ArrayList<String> arrPict;
 
-    public SolverAdapter(Context mContext, Integer[] massSolved) {
+    public AdapterSolver(Context mContext, Integer[] massSolved) {
         this.mContext = mContext;
         arrPict = new ArrayList<>(mCols*mRows);
         baseMass = new ArrayList<Integer>(Arrays.asList(massSolved));
