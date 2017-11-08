@@ -16,7 +16,6 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
 
     private GridView mGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
-    private Integer[][] mass;
     private Button pushButton;
     private Algorithm mAlgorithm;
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
@@ -30,16 +29,9 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_solver);
         getUIItems();
         setOnClickListener();
+        initArray();
 
-        /**
-         * Не вижу смысла в String. Мне Integer нравится, а лучше вообще Byte сделать.
-         * Но где-то в коде вроде столкнемся, что какой-то метод будет ожидать Integer, а мы ему Byte будем давать. Поэтому пока так
-         */
-
-        massSolved = new Integer[81];
-        for (int i = 0; i < massSolved.length; i ++) {
-            massSolved[i] = 0;
-        }
+        mAlgorithm = new Algorithm();
         mAdapterSolver = new AdapterSolver(this, massSolved);
 
         mGridView.setNumColumns(9);
@@ -49,16 +41,9 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /**
-                 * Мне так не нравится. Все-таки сначала должно выбираться поле, а потом уже число...
-                 */
                 mAdapterSolver.setItem(position, selectedButton);
             }
         });
-
-        mAlgorithm = new Algorithm();
-        mass = new Integer[10][10];
-
 
         pushButton.setOnClickListener(new View.OnClickListener() {
 
@@ -73,7 +58,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        //Пасхальный тест
+        //Пасхальный тест он до сих пор нужен?)
         btn1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -102,7 +87,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public void setOnClickListener(){
+    private void setOnClickListener(){
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
@@ -138,19 +123,27 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.main, menu);
-//        return true;
-//    }
+    private void initArray(){
+        massSolved = new Integer[81];
+        for (int i = 0; i < massSolved.length; i ++) {
+            massSolved[i] = 0;
+        }
+    }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.ButtonClear: mAdapterSolver.cleanMassInt();
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    /*
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.ButtonClear: mAdapterSolver.cleanMassInt();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    } */
 }
