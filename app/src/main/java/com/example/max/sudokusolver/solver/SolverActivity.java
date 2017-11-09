@@ -2,7 +2,6 @@ package com.example.max.sudokusolver.solver;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -57,19 +56,6 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
                 else Toast.makeText(SolverActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
             }
         });
-
-        //Пасхальный тест он до сих пор нужен?)
-        btn1.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Algorithm p = new Algorithm();
-                for (int i=0; i <=80; i++) {
-                    Log.i("MyTag", i + " " + String.valueOf(p.whereIsStartOfSquare(i)));
-                }
-                return false;
-            }
-        });
-
     }
 
     private void getUIItems(){

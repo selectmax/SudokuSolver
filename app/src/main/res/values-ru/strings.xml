@@ -3,4 +3,7 @@
     <string name="app_name">Решение Судоку</string>
     <string name="push">Решить</string>
     <string name="ButtonClear">Очистить</string>
+    <string name="game_btn_text">Игра</string>
+    <string name="solve_btn_text">Решить</string>
+    <string name="hello_text">Добро пожаловать в мир судоку!</string>
 </resources>
