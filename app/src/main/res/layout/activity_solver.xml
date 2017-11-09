@@ -11,7 +11,7 @@
         android:layout_height="360dp"
         android:layout_width="wrap_content"
         android:id="@+id/field"
-        android:paddingLeft="20dp"
+        android:paddingLeft="9пшdp"
         android:background="@drawable/bg1"/>
 
     <Button

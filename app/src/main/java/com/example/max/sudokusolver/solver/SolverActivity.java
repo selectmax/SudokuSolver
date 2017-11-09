@@ -20,6 +20,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
     public Integer selectedButton = 1;
     private AdapterSolver mAdapterSolver;
+    private int positionSelected = 0;
 
 
     @Override
@@ -40,7 +41,8 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mAdapterSolver.setItem(position, selectedButton);
+                positionSelected = position;
+               // mAdapterSolver.setItem(position, selectedButton);
             }
         });
 
@@ -88,23 +90,41 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick (View view){
         switch(view.getId()){
-            case R.id.btn1: selectedButton = 1;
+            case R.id.btn1:
+                selectedButton = 1;
+                mAdapterSolver.setItem(positionSelected, 1);
                 break;
-            case R.id.btn2: selectedButton = 2;
+            case R.id.btn2:
+                selectedButton = 2;
+                mAdapterSolver.setItem(positionSelected, 2);
                 break;
-            case R.id.btn3: selectedButton = 3;
+            case R.id.btn3:
+                selectedButton = 3;
+                mAdapterSolver.setItem(positionSelected, 3);
                 break;
-            case R.id.btn4: selectedButton = 4;
+            case R.id.btn4:
+                selectedButton = 4;
+                mAdapterSolver.setItem(positionSelected, 4);
                 break;
-            case R.id.btn5: selectedButton = 5;
+            case R.id.btn5:
+                selectedButton = 5;
+                mAdapterSolver.setItem(positionSelected, 5);
                 break;
-            case R.id.btn6: selectedButton = 6;
+            case R.id.btn6:
+                selectedButton = 6;
+                mAdapterSolver.setItem(positionSelected, 6);
                 break;
-            case R.id.btn7: selectedButton = 7;
+            case R.id.btn7:
+                selectedButton = 7;
+                mAdapterSolver.setItem(positionSelected, 7);
                 break;
-            case R.id.btn8: selectedButton = 8;
+            case R.id.btn8:
+                selectedButton = 8;
+                mAdapterSolver.setItem(positionSelected, 8);
                 break;
-            case R.id.btn9: selectedButton = 9;
+            case R.id.btn9:
+                selectedButton = 9;
+                mAdapterSolver.setItem(positionSelected, 9);
                 break;
         }
     }

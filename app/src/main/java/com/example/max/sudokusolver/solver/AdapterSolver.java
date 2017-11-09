@@ -22,6 +22,7 @@ class AdapterSolver extends BaseAdapter {
     private Resources mRes;
     private ArrayList<Integer> baseMass;
     private ArrayList<String> arrPict;
+    private String number = " ";
 
     public AdapterSolver(Context mContext, Integer[] massSolved) {
         this.mContext = mContext;
@@ -80,7 +81,13 @@ class AdapterSolver extends BaseAdapter {
             textView = (TextView) view;
         }
 
-        textView.setText(baseMass.get(position).toString());
+        if (baseMass.get(position) == 0){
+            number = " ";
+        } else {
+            number = String.valueOf(baseMass.get(position));
+        }
+
+        textView.setText(number);
 
         return textView;
     }
