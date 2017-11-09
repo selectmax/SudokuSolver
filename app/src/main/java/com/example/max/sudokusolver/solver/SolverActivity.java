@@ -37,20 +37,16 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         mGridView.setNumColumns(9);
         mGridView.setEnabled(true);
         mGridView.setAdapter(mAdapterSolver);
-
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 positionSelected = position;
-               // mAdapterSolver.setItem(position, selectedButton);
             }
         });
 
         pushButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-
                 for (int i = 0; i < 81; i++) massSolved[i] = mAdapterSolver.getItem(i);
                 if (mAlgorithm.IsEnterValid(massSolved)) {
                     mAlgorithm.solve(massSolved);

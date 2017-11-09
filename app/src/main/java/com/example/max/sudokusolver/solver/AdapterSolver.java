@@ -76,6 +76,7 @@ class AdapterSolver extends BaseAdapter {
             textView = new TextView(mContext);
             textView.setPadding(12,6, 6, 12); // настройка отступов между ячейками
             textView.setTextSize(25); // величина шрифта
+            textView.setTextScaleX((float) 1.4); // верил что сделает текст по центру, но нет( надо эту проблему решить
         }
         else {
             textView = (TextView) view;
