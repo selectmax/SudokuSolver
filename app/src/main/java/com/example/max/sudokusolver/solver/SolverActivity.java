@@ -2,6 +2,9 @@ package com.example.max.sudokusolver.solver;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,7 +21,6 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     private Button pushButton;
     private Algorithm mAlgorithm;
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
-    public Integer selectedButton = 1;
     private AdapterSolver mAdapterSolver;
     private int positionSelected = 0;
 
@@ -87,39 +89,30 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick (View view){
         switch(view.getId()){
             case R.id.btn1:
-                selectedButton = 1;
                 mAdapterSolver.setItem(positionSelected, 1);
                 break;
             case R.id.btn2:
-                selectedButton = 2;
                 mAdapterSolver.setItem(positionSelected, 2);
                 break;
             case R.id.btn3:
-                selectedButton = 3;
                 mAdapterSolver.setItem(positionSelected, 3);
                 break;
             case R.id.btn4:
-                selectedButton = 4;
                 mAdapterSolver.setItem(positionSelected, 4);
                 break;
             case R.id.btn5:
-                selectedButton = 5;
                 mAdapterSolver.setItem(positionSelected, 5);
                 break;
             case R.id.btn6:
-                selectedButton = 6;
                 mAdapterSolver.setItem(positionSelected, 6);
                 break;
             case R.id.btn7:
-                selectedButton = 7;
                 mAdapterSolver.setItem(positionSelected, 7);
                 break;
             case R.id.btn8:
-                selectedButton = 8;
                 mAdapterSolver.setItem(positionSelected, 8);
                 break;
             case R.id.btn9:
-                selectedButton = 9;
                 mAdapterSolver.setItem(positionSelected, 9);
                 break;
         }
@@ -132,7 +125,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -147,5 +140,5 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    } */
+    }
 }

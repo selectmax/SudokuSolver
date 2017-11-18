@@ -18,15 +18,11 @@ class AdapterSolver extends BaseAdapter {
 
     private Context mContext;
     private final int mRows=9, mCols=9;
-    private int numberArray[][] = new int[mRows][mCols];
-    private Resources mRes;
     private ArrayList<Integer> baseMass;
-    private ArrayList<String> arrPict;
     private String number = " ";
 
     public AdapterSolver(Context mContext, Integer[] massSolved) {
         this.mContext = mContext;
-        arrPict = new ArrayList<>(mCols*mRows);
         baseMass = new ArrayList<Integer>(Arrays.asList(massSolved));
     }
 
@@ -92,12 +88,4 @@ class AdapterSolver extends BaseAdapter {
 
         return textView;
     }
-
-   public int getRow(int position){
-       return position / 9;
-   }
-   public int getCell(int position){
-        return position % 9;
-   }
-
 }
