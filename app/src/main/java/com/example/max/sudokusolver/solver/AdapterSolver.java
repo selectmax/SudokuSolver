@@ -10,14 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by max on 19.10.2017.
- */
-
 class AdapterSolver extends BaseAdapter {
 
     private Context mContext;
-    private final int mRows=9, mCols=9;
+    private final int mRows = 9, mCols = 9;
     private ArrayList<Integer> baseMass;
     private String number = " ";
 
@@ -29,7 +25,7 @@ class AdapterSolver extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mRows*mCols;
+        return mRows * mCols;
     }
 
     @Override
@@ -37,7 +33,7 @@ class AdapterSolver extends BaseAdapter {
         return baseMass.get(i);
     }
 
-    public void setItem(int index, Integer value){
+    public void setItem(int index, Integer value) {
         baseMass.set(index, value);
         notifyDataSetChanged();
     }
@@ -52,14 +48,14 @@ class AdapterSolver extends BaseAdapter {
     }
 
     public void setBaseMass(Integer[] baseMass) {
-        for (int i = 0; i < baseMass.length; i++){
+        for (int i = 0; i < baseMass.length; i++) {
             this.baseMass.set(i, baseMass[i]);
         }
         notifyDataSetChanged();
     }
 
     public void cleanMassInt() {
-        for (int i = 0; i < 81; i++){
+        for (int i = 0; i < 81; i++) {
             this.baseMass.set(i, 0);
         }
         notifyDataSetChanged();
@@ -68,17 +64,16 @@ class AdapterSolver extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         TextView textView;
-        if (view == null){
+        if (view == null) {
             textView = new TextView(mContext);
-            textView.setPadding(12,6, 6, 12); // настройка отступов между ячейками
-            textView.setTextSize(25); // величина шрифта
-            textView.setTextScaleX((float) 1.4); // верил что сделает текст по центру, но нет( надо эту проблему решить
-        }
-        else {
+            textView.setPadding(12, 6, 6, 12);
+            textView.setTextSize(25);
+            textView.setTextScaleX((float) 1.4);
+        } else {
             textView = (TextView) view;
         }
 
-        if (baseMass.get(position) == 0){
+        if (baseMass.get(position) == 0) {
             number = " ";
         } else {
             number = String.valueOf(baseMass.get(position));

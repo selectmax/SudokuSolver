@@ -120,7 +120,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initArray(){
         massSolved = new Integer[81];
-        for (int i = 0; i < massSolved.length; i ++) {
+        for (int i = 0; i < massSolved.length; i++) {
             massSolved[i] = 0;
         }
     }

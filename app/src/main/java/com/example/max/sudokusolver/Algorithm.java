@@ -79,6 +79,27 @@ public class Algorithm {
         return true;
     }
 
+    public boolean IsElementValid(Integer[] mass, int i) {
+        if (mass[i] == 0) return true;
+
+        for (int j = ((i / 9) * 9); j <= ((i / 9) * 9) + 8; j++) {
+            if ((mass[j] == mass[i]) && (j != i))
+                return false;
+        }
+
+        for (int j = (i % 9); j <= (i % 9) + 72; j = j + 9) {
+            if ((mass[j] == mass[i]) && (j != i))
+                return false;
+        }
+        int startOfSquare = whereIsStartOfSquare(i);
+        for (int j = 0; j <= 2; j++) {
+            for (int j2 = 1; j2 <= 3; j2++) {
+                if ((mass[startOfSquare + j2 + j * 9].equals(mass[i])) && (i != (startOfSquare + j2 + j * 9)))
+                    return false;
+            }
+        } return true;
+    }
+
 
     public int whereIsStartOfSquare(int start) {
         int startOfSquare = (start / 3) * 3;
