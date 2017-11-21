@@ -10,7 +10,7 @@
     <GridView
         android:layout_height="360dp"
         android:layout_width="wrap_content"
-        android:id="@+id/field"
+        android:id="@+id/game_field"
         android:paddingLeft="9dp"
         android:background="@drawable/bg1"/>
 
@@ -27,27 +27,27 @@
             android:gravity="center"
             android:background="@color/colorPrimary">
             <Button
-                android:id="@+id/btn1"
+                android:id="@+id/game_btn1"
                 style="@style/btn"
                 android:background="@drawable/i1">
             </Button>
             <Button
-                android:id="@+id/btn2"
+                android:id="@+id/game_btn2"
                 style="@style/btn"
                 android:background="@drawable/i2">
             </Button>
             <Button
-                android:id="@+id/btn3"
+                android:id="@+id/game_btn3"
                 style="@style/btn"
                 android:background="@drawable/i3">
             </Button>
             <Button
-                android:id="@+id/btn4"
+                android:id="@+id/game_btn4"
                 style="@style/btn"
                 android:background="@drawable/i4">
             </Button>
             <Button
-                android:id="@+id/btn5"
+                android:id="@+id/game_btn5"
                 style="@style/btn"
                 android:background="@drawable/i5">
             </Button>
@@ -59,22 +59,22 @@
             android:gravity="center"
             android:background="@color/colorPrimary">
             <Button
-                android:id="@+id/btn6"
+                android:id="@+id/game_btn6"
                 style="@style/btn"
                 android:background="@drawable/i6">
             </Button>
             <Button
-                android:id="@+id/btn7"
+                android:id="@+id/game_btn7"
                 style="@style/btn"
                 android:background="@drawable/i7">
             </Button>
             <Button
-                android:id="@+id/btn8"
+                android:id="@+id/game_btn8"
                 style="@style/btn"
                 android:background="@drawable/i8">
             </Button>
             <Button
-                android:id="@+id/btn9"
+                android:id="@+id/game_btn9"
                 style="@style/btn"
                 android:background="@drawable/i9">
             </Button>

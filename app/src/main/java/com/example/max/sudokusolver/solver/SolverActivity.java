@@ -52,13 +52,14 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
                 for (int i = 0; i < 81; i++) massSolved[i] = mAdapterSolver.getItem(i);
                 if (mAlgorithm.IsEnterValid(massSolved)) {
                     mAlgorithm.solve(massSolved);
-                    mAdapterSolver.setBaseMass(mAlgorithm.getMassInt());}
-                else Toast.makeText(SolverActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
+                    mAdapterSolver.setBaseMass(mAlgorithm.getMassInt());
+                } else
+                    Toast.makeText(SolverActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void getUIItems(){
+    private void getUIItems() {
         pushButton = (Button) findViewById(R.id.push_button);
         mGridView = (GridView) findViewById(R.id.field);
         btn1 = (Button) findViewById(R.id.btn1);
@@ -73,7 +74,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void setOnClickListener(){
+    private void setOnClickListener() {
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
@@ -86,8 +87,8 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick (View view){
-        switch(view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn1:
                 mAdapterSolver.setItem(positionSelected, 1);
                 break;
@@ -118,7 +119,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void initArray(){
+    private void initArray() {
         massSolved = new Integer[81];
         for (int i = 0; i < massSolved.length; i++) {
             massSolved[i] = 0;
@@ -136,7 +137,8 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.ButtonClear: mAdapterSolver.cleanMassInt();
+            case R.id.ButtonClear:
+                mAdapterSolver.cleanMassInt();
                 return true;
         }
         return super.onOptionsItemSelected(item);

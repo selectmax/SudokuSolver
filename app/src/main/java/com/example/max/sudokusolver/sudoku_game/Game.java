@@ -46,7 +46,7 @@ class Game extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void initArray() { //Здесь должно быть this.baseMass или просто baseMass? и this.mAlgorithm или просто mAlgorithm?
+    public void initArray() {
         baseMass = new Integer[81];
         for (int i = 0; i < baseMass.length; i++) {
             baseMass[i] = 0;

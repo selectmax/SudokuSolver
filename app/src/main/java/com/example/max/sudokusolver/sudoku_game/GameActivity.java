@@ -1,5 +1,6 @@
 package com.example.max.sudokusolver.sudoku_game;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,7 +13,7 @@ import com.example.max.sudokusolver.R;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private GridView mGridView;
+    private GridView gameGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Game mGame;
     private Integer[] massTask;
@@ -21,17 +22,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1 ); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
         setContentView(R.layout.activity_game);
         mGame = new Game(this);
         getUIItems();
         setOnClickListener();
-        mGridView.setNumColumns(9);
-        mGridView.setEnabled(true);
-        mGridView.setAdapter(mGame);
+        gameGridView.setNumColumns(9);
+        gameGridView.setEnabled(true);
+        gameGridView.setAdapter(mGame);
         mGame.initArray();
 
 
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 positionSelected = position;
@@ -41,16 +44,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getUIItems(){
-        mGridView = (GridView) findViewById(R.id.field);
-        btn1 = (Button) findViewById(R.id.btn1);
-        btn2 = (Button) findViewById(R.id.btn2);
-        btn3 = (Button) findViewById(R.id.btn3);
-        btn4 = (Button) findViewById(R.id.btn4);
-        btn5 = (Button) findViewById(R.id.btn5);
-        btn6 = (Button) findViewById(R.id.btn6);
-        btn7 = (Button) findViewById(R.id.btn7);
-        btn8 = (Button) findViewById(R.id.btn8);
-        btn9 = (Button) findViewById(R.id.btn9);
+        gameGridView = (GridView) findViewById(R.id.game_field);
+        btn1 = (Button) findViewById(R.id.game_btn1);
+        btn2 = (Button) findViewById(R.id.game_btn2);
+        btn3 = (Button) findViewById(R.id.game_btn3);
+        btn4 = (Button) findViewById(R.id.game_btn4);
+        btn5 = (Button) findViewById(R.id.game_btn5);
+        btn6 = (Button) findViewById(R.id.game_btn6);
+        btn7 = (Button) findViewById(R.id.game_btn7);
+        btn8 = (Button) findViewById(R.id.game_btn8);
+        btn9 = (Button) findViewById(R.id.game_btn9);
     }
 
     private void setOnClickListener(){
@@ -97,4 +100,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
 }
