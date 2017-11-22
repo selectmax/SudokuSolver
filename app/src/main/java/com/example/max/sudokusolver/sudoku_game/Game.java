@@ -1,6 +1,7 @@
 package com.example.max.sudokusolver.sudoku_game;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,13 +9,15 @@ import android.widget.TextView;
 
 import com.example.max.sudokusolver.Algorithm;
 
+import java.util.Random;
+
 class Game extends BaseAdapter {
 
     private Integer[] baseMass; //Массив хранения актуальных игровых цифр
-    private Boolean[] hiddenElements; //Массив хранения меток сокрытия элементов на данный момент. 1 - элемент скрыт, 0 - элемент открыт
+    private Integer[] userBaseMass; //Массив хранения пользовательской догадки
     private Boolean[] blockedElements; //Массив хранения меток блокирования элементов. 1 - элемент задания, недоступен для редактирования, 0 - элемент доступный для изменения
     private Context mContext;
-    private Algorithm mAlgorithm;
+    private Algorithm mGameAlgorithm;
     private final int mRows = 9, mCols = 9;
     private String number = " ";
 
@@ -44,7 +47,7 @@ class Game extends BaseAdapter {
         if (view == null) {
             textView = new TextView(mContext);
             textView.setPadding(12, 6, 6, 12);
-            textView.setTextSize(25);
+            textView.setTextSize(22);
             textView.setTextScaleX((float) 1.4);
         } else {
             textView = (TextView) view;
@@ -62,17 +65,40 @@ class Game extends BaseAdapter {
     }
 
     public void setItem(int positionSelected, int i) {
+        if (!blockedElements[positionSelected]) {// изменить число
+        } else {
+            Log.i("MyTag", "Попытка изменить число, но найден blockedElement == true");
+        }
         baseMass[positionSelected] = i;
         notifyDataSetChanged();
     }
 
     public void initArray() {
+        final int COUNTER_FIRST_RANDOM_FILL = 1000; //Показатель степени рандомности исходного поля. При 30 - первая строка чаще всего предсказуема. 10000 - уже заметно долгое вычисление
         baseMass = new Integer[81];
+        mGameAlgorithm = new Algorithm();
         for (int i = 0; i < baseMass.length; i++) {
             baseMass[i] = 0;
         }
-        mAlgorithm = new Algorithm();
-        mAlgorithm.solve(baseMass);
+
+        for (int j = 0; j < COUNTER_FIRST_RANDOM_FILL; j++) {
+            int randomField;
+            int randomValue;
+            Random random = new Random();
+            randomField = random.nextInt(81);
+            randomValue = (random.nextInt(9) + 1);
+            if (baseMass[randomField] == 0) baseMass[randomField] = randomValue;
+            if (!mGameAlgorithm.IsEnterValid(baseMass)) {
+                baseMass[randomField] = 0;
+            }
+        }
+        mGameAlgorithm.solve(baseMass);
         notifyDataSetChanged();
+    }
+
+    public void synchronizeBaseMass() {
+        for (int i = 0; i < 81; i++) {
+            userBaseMass[i] = baseMass[i];
+        }
     }
 }
