@@ -38,7 +38,6 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 LevelOfDifficult = (byte) position;
-                Log.i("LevelOfDifficult", String.valueOf(position));
             }
 
             @Override

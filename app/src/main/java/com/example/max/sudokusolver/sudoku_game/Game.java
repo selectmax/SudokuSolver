@@ -4,17 +4,19 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.example.max.sudokusolver.Algorithm;
 
 class Game extends BaseAdapter {
 
     private Integer[] baseMass; //Массив хранения актуальных игровых цифр
-    private Integer[] hiddenElements; //Массив хранения меток сокрытия элементов на данный момент. 1 - элемент скрыт, 0 - элемент открыт
-    private Integer[] blockedElements; //Массив хранения меток блокирования элементов. 1 - элемент задания, недоступен для редактирования, 0 - элемент доступный для изменения
+    private Boolean[] hiddenElements; //Массив хранения меток сокрытия элементов на данный момент. 1 - элемент скрыт, 0 - элемент открыт
+    private Boolean[] blockedElements; //Массив хранения меток блокирования элементов. 1 - элемент задания, недоступен для редактирования, 0 - элемент доступный для изменения
     private Context mContext;
     private Algorithm mAlgorithm;
     private final int mRows = 9, mCols = 9;
+    private String number = " ";
 
 
     public Game(Context mContext) {
@@ -37,8 +39,26 @@ class Game extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return convertView;
+    public View getView(int position, View view, ViewGroup parent) {
+        TextView textView;
+        if (view == null) {
+            textView = new TextView(mContext);
+            textView.setPadding(12, 6, 6, 12);
+            textView.setTextSize(25);
+            textView.setTextScaleX((float) 1.4);
+        } else {
+            textView = (TextView) view;
+        }
+
+        if (baseMass[position] == 0) {
+            number = " ";
+        } else {
+            number = String.valueOf(baseMass[position]);
+        }
+
+        textView.setText(number);
+
+        return textView;
     }
 
     public void setItem(int positionSelected, int i) {
