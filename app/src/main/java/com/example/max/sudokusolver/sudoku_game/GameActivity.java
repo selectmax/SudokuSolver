@@ -3,6 +3,7 @@ package com.example.max.sudokusolver.sudoku_game;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,7 +26,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1 ); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
+        byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
 
         setContentView(R.layout.activity_game);
         mGame = new Game(this);
@@ -37,12 +38,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         long start = System.currentTimeMillis();
         mGame.initArray();
-        long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;
-            Toast toast = Toast.makeText(GameActivity.this ,"Поле сгенерировано за " + timeConsumedMillis + " мс\nМетод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_SHORT);
-            toast.show();
+        long mid = System.currentTimeMillis();
         mGame.initUserBaseMass(LevelOfDifficult);
-
+        long finish = System.currentTimeMillis();
+        long time1 = mid - start;
+        long time2 = finish - mid;
+        Toast toast = Toast.makeText(GameActivity.this, "Поле сгенерировано за " + time1 + " мс\n" + "Поле скрыто за " + time2 + " мс\n" + "Метод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_SHORT);
+        toast.show();
 
         gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -53,7 +55,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void getUIItems(){
+    private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
         btn1 = (Button) findViewById(R.id.game_btn1);
         btn2 = (Button) findViewById(R.id.game_btn2);
@@ -66,7 +68,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn9 = (Button) findViewById(R.id.game_btn9);
     }
 
-    private void setOnClickListener(){
+    private void setOnClickListener() {
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
@@ -80,7 +82,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.btn1:
                 mGame.setItem(positionSelected, 1);
                 break;

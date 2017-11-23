@@ -14,7 +14,7 @@ import java.util.Random;
 class Game extends BaseAdapter {
 
     private Integer[] baseMass = new Integer[81]; //Массив хранения актуальных игровых цифр
-    private Integer[] userBaseMass = new Integer[81]; //Массив хранения пользовательской догадки
+    public Integer[] userBaseMass = new Integer[81]; //Массив хранения пользовательской догадки
     private Boolean[] blockedElements = new Boolean[81]; //Массив хранения меток блокирования элементов. 1 - элемент задания, недоступен для редактирования, 0 - элемент доступный для изменения
     private Context mContext;
     private Algorithm mGameAlgorithm;
