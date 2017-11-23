@@ -93,8 +93,8 @@ public class Algorithm {
         }
         int startOfSquare = whereIsStartOfSquare(i);
         for (int j = 0; j <= 2; j++) {
-            for (int j2 = 1; j2 <= 3; j2++) {
-                if ((mass[startOfSquare + j2 + j * 9].equals(mass[i])) && (i != (startOfSquare + j2 + j * 9)))
+            for (int j2 = 0; j2 <= 2; j2++) {
+                if ((mass[startOfSquare + j2 + (j * 9)].equals(mass[i])) && (i != (startOfSquare + j2 + (j * 9))))
                     return false;
             }
         } return true;

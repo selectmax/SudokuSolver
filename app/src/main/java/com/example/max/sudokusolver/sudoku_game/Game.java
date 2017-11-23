@@ -20,6 +20,7 @@ class Game extends BaseAdapter {
     private Algorithm mGameAlgorithm;
     private final int mRows = 9, mCols = 9;
     private String number = " ";
+    public int HowManyTimesRunned = 0;
 
 
     public Game(Context mContext) {
@@ -74,28 +75,31 @@ class Game extends BaseAdapter {
     }
 
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 1000; //Показатель степени рандомности исходного поля. При 30 - первая строка чаще всего предсказуема. 10000 - уже заметно долгое вычисление
+        final int COUNTER_FIRST_RANDOM_FILL = 30; //Показатель степени рандомности исходного поля. 0-80
+        int FilledCounter = 0;
+        HowManyTimesRunned++;
         baseMass = new Integer[81];
         mGameAlgorithm = new Algorithm();
         for (int i = 0; i < baseMass.length; i++) {
             baseMass[i] = 0;
         }
 
-        for (int j = 0; j < COUNTER_FIRST_RANDOM_FILL; j++) {
+        while (FilledCounter <= COUNTER_FIRST_RANDOM_FILL) {
             int randomField;
             int randomValue;
             Random random = new Random();
             randomField = random.nextInt(81);
             randomValue = (random.nextInt(9) + 1);
             if (baseMass[randomField] == 0) baseMass[randomField] = randomValue;
-            if (!mGameAlgorithm.IsEnterValid(baseMass)) {
+            if (!mGameAlgorithm.IsElementValid(baseMass, randomField)) {
                 baseMass[randomField] = 0;
-            }
+            } else FilledCounter++;
         }
-        mGameAlgorithm.solve(baseMass);
+        if (!mGameAlgorithm.solve(baseMass)) {initArray();
+         }
+
         notifyDataSetChanged();
     }
-
     public void synchronizeBaseMass() {
         for (int i = 0; i < 81; i++) {
             userBaseMass[i] = baseMass[i];

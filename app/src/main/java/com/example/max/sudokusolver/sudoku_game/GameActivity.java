@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
@@ -31,7 +32,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGridView.setNumColumns(9);
         gameGridView.setEnabled(true);
         gameGridView.setAdapter(mGame);
+        long start = System.currentTimeMillis();
         mGame.initArray();
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;
+        Toast toast = Toast.makeText(GameActivity.this ,"Поле сгенерировано за " + timeConsumedMillis + " мс\nМетод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_SHORT);
+        toast.show();
 
 
         gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
