@@ -54,10 +54,10 @@ class Game extends BaseAdapter {
             textView = (TextView) view;
         }
 
-        if (baseMass[position] == 0) {
+        if (userBaseMass[position] == 0) {
             number = " ";
         } else {
-            number = String.valueOf(baseMass[position]);
+            number = String.valueOf(userBaseMass[position]);
         }
 
         textView.setText(number);
