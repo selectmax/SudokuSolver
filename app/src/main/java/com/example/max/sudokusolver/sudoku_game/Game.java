@@ -66,11 +66,11 @@ class Game extends BaseAdapter {
     }
 
     public void setItem(int positionSelected, int i) {
-        if (!blockedElements[positionSelected]) {// изменить число
+        if (!blockedElements[positionSelected]) { userBaseMass[positionSelected] = i;
         } else {
             Log.i("MyTag", "Попытка изменить число, но найден blockedElement == true");
         }
-        baseMass[positionSelected] = i;
+        //userBaseMass[positionSelected] = i;
         notifyDataSetChanged();
     }
 
