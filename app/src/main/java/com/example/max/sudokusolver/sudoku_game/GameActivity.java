@@ -23,8 +23,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Intent intent = getIntent();
         byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1 ); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
+
         setContentView(R.layout.activity_game);
         mGame = new Game(this);
         getUIItems();
@@ -32,12 +34,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGridView.setNumColumns(9);
         gameGridView.setEnabled(true);
         gameGridView.setAdapter(mGame);
+
         long start = System.currentTimeMillis();
         mGame.initArray();
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
-        Toast toast = Toast.makeText(GameActivity.this ,"Поле сгенерировано за " + timeConsumedMillis + " мс\nМетод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_SHORT);
-        toast.show();
+            Toast toast = Toast.makeText(GameActivity.this ,"Поле сгенерировано за " + timeConsumedMillis + " мс\nМетод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_SHORT);
+            toast.show();
+        mGame.initUserBaseMass(LevelOfDifficult);
 
 
         gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

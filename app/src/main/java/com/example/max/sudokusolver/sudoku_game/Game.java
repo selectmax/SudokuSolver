@@ -13,9 +13,9 @@ import java.util.Random;
 
 class Game extends BaseAdapter {
 
-    private Integer[] baseMass; //Массив хранения актуальных игровых цифр
-    private Integer[] userBaseMass; //Массив хранения пользовательской догадки
-    private Boolean[] blockedElements; //Массив хранения меток блокирования элементов. 1 - элемент задания, недоступен для редактирования, 0 - элемент доступный для изменения
+    private Integer[] baseMass = new Integer[81]; //Массив хранения актуальных игровых цифр
+    private Integer[] userBaseMass = new Integer[81]; //Массив хранения пользовательской догадки
+    private Boolean[] blockedElements = new Boolean[81]; //Массив хранения меток блокирования элементов. 1 - элемент задания, недоступен для редактирования, 0 - элемент доступный для изменения
     private Context mContext;
     private Algorithm mGameAlgorithm;
     private final int mRows = 9, mCols = 9;
@@ -78,7 +78,6 @@ class Game extends BaseAdapter {
         final int COUNTER_FIRST_RANDOM_FILL = 30; //Показатель степени рандомности исходного поля. 0-80
         int FilledCounter = 0;
         HowManyTimesRunned++;
-        baseMass = new Integer[81];
         mGameAlgorithm = new Algorithm();
         for (int i = 0; i < baseMass.length; i++) {
             baseMass[i] = 0;
@@ -100,9 +99,31 @@ class Game extends BaseAdapter {
 
         notifyDataSetChanged();
     }
-    public void synchronizeBaseMass() {
+    public void initUserBaseMass(byte levelOfDifficult) {
+        byte HowManyElementsNeedToOpen = 60;
+        switch(levelOfDifficult) {
+            case 0:
+                HowManyElementsNeedToOpen = 70;
+                break;
+            case 1:
+                HowManyElementsNeedToOpen = 60;
+                break;
+            case 2:
+                HowManyElementsNeedToOpen = 50;
+                break;
+        }
         for (int i = 0; i < 81; i++) {
-            userBaseMass[i] = baseMass[i];
+            userBaseMass[i] = 0;
+        }
+        while (HowManyElementsNeedToOpen != 0) {
+            int randomField;
+            Random random = new Random();
+            randomField = random.nextInt(81);
+            if (userBaseMass[randomField] == 0) {
+                userBaseMass[randomField] = baseMass[randomField];
+                blockedElements[randomField] = true;
+                HowManyElementsNeedToOpen--;
+            }
         }
     }
 }
