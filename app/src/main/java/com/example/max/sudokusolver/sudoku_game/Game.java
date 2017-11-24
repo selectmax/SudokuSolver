@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.max.sudokusolver.Algorithm;
 
+import java.util.Objects;
 import java.util.Random;
 
 class Game extends BaseAdapter {
@@ -66,12 +68,29 @@ class Game extends BaseAdapter {
     }
 
     public void setItem(int positionSelected, int i) {
-        if (!blockedElements[positionSelected]) { userBaseMass[positionSelected] = i;
+        if (!blockedElements[positionSelected]) {
+            userBaseMass[positionSelected] = i;
+            Log.i("MyTag", "Число изменено");
+            if (userBaseMass[positionSelected] != baseMass[positionSelected]) {
+                //показывать или не показывать подсказку, что элемент неверный? Цветом, выделением?
+                Log.i("MyTag", "Элемент не валидный");
+            }
+            if (sudokuIsSolved()) {
+                //Выкинуть поздравление - судоку решено!
+                Log.i("Congrats", "Судоку решено");
+            }
         } else {
             Log.i("MyTag", "Попытка изменить число, но найден blockedElement == true");
         }
-        //userBaseMass[positionSelected] = i;
         notifyDataSetChanged();
+    }
+
+    private boolean sudokuIsSolved() {
+        for (int i = 0; i < 81; i++) {
+            if (!userBaseMass[i].equals(baseMass[i]))
+                return false;
+        }
+        return true;
     }
 
     public void initArray() {
@@ -94,14 +113,16 @@ class Game extends BaseAdapter {
                 baseMass[randomField] = 0;
             } else FilledCounter++;
         }
-        if (!mGameAlgorithm.solve(baseMass)) {initArray();
-         }
+        if (!mGameAlgorithm.solve(baseMass)) {
+            initArray();
+        }
 
         notifyDataSetChanged();
     }
+
     public void initUserBaseMass(byte levelOfDifficult) {
         byte HowManyElementsNeedToOpen = 60;
-        switch(levelOfDifficult) {
+        switch (levelOfDifficult) {
             case 0:
                 HowManyElementsNeedToOpen = 70;
                 break;
@@ -114,6 +135,7 @@ class Game extends BaseAdapter {
         }
         for (int i = 0; i < 81; i++) {
             userBaseMass[i] = 0;
+            blockedElements[i] = false;
         }
         while (HowManyElementsNeedToOpen != 0) {
             int randomField;

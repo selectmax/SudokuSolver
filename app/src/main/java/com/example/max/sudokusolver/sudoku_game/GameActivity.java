@@ -43,7 +43,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         long finish = System.currentTimeMillis();
         long time1 = mid - start;
         long time2 = finish - mid;
-        Toast toast = Toast.makeText(GameActivity.this, "Поле сгенерировано за " + time1 + " мс\n" + "Поле скрыто за " + time2 + " мс\n" + "Метод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(GameActivity.this, "Поле сгенерировано за " + time1 + " мс\n" + "Поле скрыто за " + time2 + " мс\n" + "Метод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_LONG);
         toast.show();
 
         gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,31 +83,31 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn1:
+            case R.id.game_btn1:
                 mGame.setItem(positionSelected, 1);
                 break;
-            case R.id.btn2:
+            case R.id.game_btn2:
                 mGame.setItem(positionSelected, 2);
                 break;
-            case R.id.btn3:
+            case R.id.game_btn3:
                 mGame.setItem(positionSelected, 3);
                 break;
-            case R.id.btn4:
+            case R.id.game_btn4:
                 mGame.setItem(positionSelected, 4);
                 break;
-            case R.id.btn5:
+            case R.id.game_btn5:
                 mGame.setItem(positionSelected, 5);
                 break;
-            case R.id.btn6:
+            case R.id.game_btn6:
                 mGame.setItem(positionSelected, 6);
                 break;
-            case R.id.btn7:
+            case R.id.game_btn7:
                 mGame.setItem(positionSelected, 7);
                 break;
-            case R.id.btn8:
+            case R.id.game_btn8:
                 mGame.setItem(positionSelected, 8);
                 break;
-            case R.id.btn9:
+            case R.id.game_btn9:
                 mGame.setItem(positionSelected, 9);
                 break;
         }
