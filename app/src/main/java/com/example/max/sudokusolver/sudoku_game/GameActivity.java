@@ -3,14 +3,12 @@ package com.example.max.sudokusolver.sudoku_game;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {

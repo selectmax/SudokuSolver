@@ -1,27 +1,31 @@
-package com.example.max.sudokusolver.solver;
+package com.example.max.sudokusolver.solver.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-class AdapterSolver extends BaseAdapter {
+public class AdapterSolverFirst extends BaseAdapter {
 
     private Context mContext;
     private final int mRows = 9, mCols = 9;
     private ArrayList<Integer> baseMass;
     private String number = " ";
 
-    public AdapterSolver(Context mContext, Integer[] massSolved) {
+    public AdapterSolverFirst(Context mContext, Integer[] massSolved) {
         this.mContext = mContext;
-        baseMass = new ArrayList<Integer>(Arrays.asList(massSolved));
+        baseMass = new ArrayList<>();
+        initArray(massSolved);
     }
 
+    private void initArray(Integer[] mass){
+        for (int i = 0; i < 27; i++){
+            baseMass.add(i, mass[i]);
+        }
+    }
 
     @Override
     public int getCount() {
@@ -40,7 +44,7 @@ class AdapterSolver extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     public ArrayList<Integer> getBaseMass() {
@@ -48,14 +52,14 @@ class AdapterSolver extends BaseAdapter {
     }
 
     public void setBaseMass(Integer[] baseMass) {
-        for (int i = 0; i < baseMass.length; i++) {
+        for (int i = 0; i < 27; i++) {
             this.baseMass.set(i, baseMass[i]);
         }
         notifyDataSetChanged();
     }
 
     public void cleanMassInt() {
-        for (int i = 0; i < 81; i++) {
+        for (int i = 0; i < 27; i++) {
             this.baseMass.set(i, 0);
         }
         notifyDataSetChanged();
