@@ -269,6 +269,8 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         switch (item.getItemId()) {
             case R.id.ButtonClear:
                 mAdapterSolverFirst.cleanMassInt();
+                mAdapterSolverSecond.cleanMassInt();
+                mAdapterSolverThird.cleanMassInt();
                 return true;
         }
         return super.onOptionsItemSelected(item);
