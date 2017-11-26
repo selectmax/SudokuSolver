@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -57,6 +58,17 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+        mGridViewFirst.setOnTouchListener(new AdapterView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_MOVE) {
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
         mGridViewSecond.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -64,10 +76,32 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+        mGridViewSecond.setOnTouchListener(new AdapterView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_MOVE) {
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
         mGridViewThird.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 positionSelected = position + mFaultThird;
+            }
+        });
+
+        mGridViewThird.setOnTouchListener(new AdapterView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_MOVE) {
+                    return true;
+                }
+
+                return false;
             }
         });
 

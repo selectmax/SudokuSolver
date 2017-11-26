@@ -1,22 +1,41 @@
 package com.example.max.sudokusolver.solver.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import com.example.max.sudokusolver.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class AdapterSolverFirst extends BaseAdapter {
 
     private Context mContext;
-    private final int mRows = 9, mCols = 9;
+    private final int mRows = 3, mCols = 9;
     private ArrayList<Integer> baseMass;
     private String number = " ";
+    private LayoutInflater mLayoutInflater;
+    private Set<Integer> rightSideNumbers;
+    private Set<Integer> cetnrSideNumbers;
+    private Map<Integer, Integer> mNubersMap;
 
     public AdapterSolverFirst(Context mContext, Integer[] massSolved) {
         this.mContext = mContext;
+        mLayoutInflater = LayoutInflater.from(mContext);
+        rightSideNumbers = new HashSet<>();
+        cetnrSideNumbers = new HashSet<>();
+        mNubersMap = new HashMap<>();
+        initNumbersMap();
+        fillRightSet();
+        fillCenterSet();
         baseMass = new ArrayList<>();
         initArray(massSolved);
     }
@@ -25,6 +44,42 @@ public class AdapterSolverFirst extends BaseAdapter {
         for (int i = 0; i < 27; i++){
             baseMass.add(i, mass[i]);
         }
+    }
+
+    private void initNumbersMap(){
+        mNubersMap.put(1, R.drawable.o1);
+        mNubersMap.put(2, R.drawable.o2);
+        mNubersMap.put(3, R.drawable.o3);
+        mNubersMap.put(4, R.drawable.o4);
+        mNubersMap.put(5, R.drawable.o5);
+        mNubersMap.put(6, R.drawable.o6);
+        mNubersMap.put(7, R.drawable.o7);
+        mNubersMap.put(8, R.drawable.o8);
+        mNubersMap.put(9, R.drawable.o9);
+    }
+
+    private void fillRightSet(){
+        rightSideNumbers.add(6);
+        rightSideNumbers.add(7);
+        rightSideNumbers.add(8);
+        rightSideNumbers.add(15);
+        rightSideNumbers.add(16);
+        rightSideNumbers.add(17);
+        rightSideNumbers.add(24);
+        rightSideNumbers.add(25);
+        rightSideNumbers.add(26);
+    }
+
+    private void fillCenterSet(){
+        cetnrSideNumbers.add(3);
+        cetnrSideNumbers.add(4);
+        cetnrSideNumbers.add(5);
+        cetnrSideNumbers.add(12);
+        cetnrSideNumbers.add(13);
+        cetnrSideNumbers.add(14);
+        cetnrSideNumbers.add(21);
+        cetnrSideNumbers.add(22);
+        cetnrSideNumbers.add(23);
     }
 
     @Override
@@ -67,24 +122,44 @@ public class AdapterSolverFirst extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        TextView textView;
-        if (view == null) {
-            textView = new TextView(mContext);
-            textView.setPadding(12, 6, 6, 12);
-            textView.setTextSize(25);
-            textView.setTextScaleX((float) 1.4);
+        ViewHolder holder;
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(117, 117);
+
+        if (view == null){
+            view = mLayoutInflater.inflate(R.layout.grid_item_view, null);
+            holder = new ViewHolder();
+            holder.mNumberView = (ImageView) view.findViewById(R.id.imageView_number);
+            params = new RelativeLayout.LayoutParams(117, 117);
+            holder.mNumberView.setLayoutParams(params);
+
+            view.setTag(holder);
         } else {
-            textView = (TextView) view;
+            holder = (ViewHolder) view.getTag();
         }
 
-        if (baseMass.get(position) == 0) {
-            number = " ";
-        } else {
-            number = String.valueOf(baseMass.get(position));
+        if (rightSideNumbers.contains(position)){
+            params.setMargins(9, 1, 0, 0);
+            holder.mNumberView.setLayoutParams(params);
         }
 
-        textView.setText(number);
+        if (cetnrSideNumbers.contains(position)){
+           params.setMargins(4, 0, 2, 0);
+           holder.mNumberView.setLayoutParams(params);
+        }
 
-        return textView;
+        if (mNubersMap.containsKey(baseMass.get(position))){
+            holder.mNumberView.setImageResource(mNubersMap.get(baseMass.get(position)));
+        }
+
+        if (baseMass.get(position) == 0){
+            holder.mNumberView.setImageResource(R.drawable.o0);
+        }
+        return view;
+
+    }
+
+
+    static class ViewHolder{
+        ImageView mNumberView;
     }
 }

@@ -1,9 +1,8 @@
 package com.example.max.sudokusolver;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,7 +28,7 @@ public class MenuActivity extends AppCompatActivity {
         String[] diff = {getString(R.string.difficulty_level_easy), getString(R.string.difficulty_level_normal), getString(R.string.difficulty_level_hard)};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, diff);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = (Spinner) findViewById(R.id.difficulty_level_spinner);
+        spinner = (Spinner) findViewById(R.id.difficulty_level_spinner);
         spinner.setAdapter(adapter);
         spinner.setPrompt(getString(R.string.difficulty_level));
         spinner.setSelection(1);
