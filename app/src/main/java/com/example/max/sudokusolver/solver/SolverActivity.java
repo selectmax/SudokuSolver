@@ -182,104 +182,44 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn1:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 1);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 1);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 1);
-                }
+                checkForBtn(1);
                 break;
             case R.id.btn2:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 2);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 2);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 2);
-                }
+                checkForBtn(2);
                 break;
             case R.id.btn3:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 3);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 3);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 3);
-                }
+                checkForBtn(3);
                 break;
             case R.id.btn4:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 4);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 4);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 4);
-                }
+                checkForBtn(4);
                 break;
             case R.id.btn5:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 5);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 5);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 5);
-                }
+                checkForBtn(5);
                 break;
             case R.id.btn6:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 6);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 6);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 6);
-                }
+                checkForBtn(6);
                 break;
             case R.id.btn7:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 7);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 7);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 7);
-                }
+                checkForBtn(7);
                 break;
             case R.id.btn8:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 8);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 8);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 8);
-                }
+                checkForBtn(8);
                 break;
             case R.id.btn9:
-                if (positionSelected < 27) {
-                    mAdapterSolverFirst.setItem(positionSelected, 9);
-                }
-                if (positionSelected >= 27 && positionSelected < 54){
-                    mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, 9);
-                }
-                if (positionSelected >= 54 && positionSelected < 81){
-                    mAdapterSolverThird.setItem(positionSelected - mFaultThird, 9);
-                }
+                checkForBtn(9);
                 break;
+        }
+    }
+
+    private void checkForBtn (int valueof) {
+        if (positionSelected < 27) {
+            mAdapterSolverFirst.setItem(positionSelected, valueof);
+        }
+        if (positionSelected >= 27 && positionSelected < 54){
+            mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, valueof);
+        }
+        if (positionSelected >= 54 && positionSelected < 81){
+            mAdapterSolverThird.setItem(positionSelected - mFaultThird, valueof);
         }
     }
 
