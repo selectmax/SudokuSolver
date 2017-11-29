@@ -22,7 +22,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+/**
+ * Вытаскиваем из интента уровень сложности, который был выбран в меню. 0 - Easy, 1 - Normal или 2 - Hard.
+ */
         Intent intent = getIntent();
         byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
 
@@ -34,6 +36,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGridView.setEnabled(true);
         gameGridView.setAdapter(mGame);
 
+/**
+ * Инициализируем Массив с помощью initArray, создаем userBaseMass - массив элементов, которые отображаются пользователю;
+ * Все обернуто в измерители времени для вычисления времени работы этих функций. Время непредсказуемое - зависит от рандома все.
+  */
         long start = System.currentTimeMillis();
         mGame.initArray();
         long mid = System.currentTimeMillis();
