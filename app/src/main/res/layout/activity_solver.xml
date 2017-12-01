@@ -7,44 +7,15 @@
     android:background="@color/backgroundColorSolver"
     >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="121dp"
-        android:orientation="vertical">
 
     <GridView
-        android:layout_height="117dp"
+        android:layout_height="351dp"
         android:layout_width="wrap_content"
         android:id="@+id/field_first_line"
-        android:background="@drawable/grid_view_first"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="121dp"
-        android:orientation="vertical">
-
-    <GridView
-        android:layout_height="117dp"
-        android:layout_width="wrap_content"
-        android:id="@+id/field_seconf_line"
-        android:background="@drawable/grid_view_second"/>
-
-    </LinearLayout>
+        android:background="@drawable/field"
+        android:listSelector="@drawable/list_selector"/>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="121dp"
-        android:orientation="vertical">
-    <GridView
-        android:layout_height="117dp"
-        android:layout_width="wrap_content"
-        android:id="@+id/field_third_line"
-        android:background="@drawable/grid_view_third"/>
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/push_button"

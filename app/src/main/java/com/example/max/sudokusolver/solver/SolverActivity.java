@@ -14,25 +14,19 @@ import android.widget.Toast;
 
 import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
-import com.example.max.sudokusolver.solver.adapters.AdapterSolverFirst;
-import com.example.max.sudokusolver.solver.adapters.AdapterSolverSecond;
-import com.example.max.sudokusolver.solver.adapters.AdapterSolverThird;
+import com.example.max.sudokusolver.solver.adapter.AdapterSolver;
 
 public class SolverActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final int mFaultSecond = 27;
     private final int mFaultThird = 54;
 
-    private GridView mGridViewFirst;
-    private GridView mGridViewSecond;
-    private GridView mGridViewThird;
+    private GridView mGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Button pushButton;
     private Algorithm mAlgorithm;
     private Integer[] massSolved; //массив который передается и возвращается алгоритмом
-    private AdapterSolverFirst mAdapterSolverFirst;
-    private AdapterSolverSecond mAdapterSolverSecond;
-    private AdapterSolverThird mAdapterSolverThird;
+    private AdapterSolver mAdapterSolver;
     private int positionSelected = 0;
 
 
@@ -45,56 +39,18 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         initArray();
 
         mAlgorithm = new Algorithm();
-        mAdapterSolverFirst = new AdapterSolverFirst(this, massSolved);
-        mAdapterSolverSecond = new AdapterSolverSecond(this, massSolved);
-        mAdapterSolverThird = new AdapterSolverThird(this, massSolved);
+        mAdapterSolver = new AdapterSolver(this, massSolved);
 
         initGridView();
 
-        mGridViewFirst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 positionSelected = position;
             }
         });
 
-        mGridViewFirst.setOnTouchListener(new AdapterView.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_MOVE) {
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-        mGridViewSecond.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                positionSelected = position + mFaultSecond;
-            }
-        });
-
-        mGridViewSecond.setOnTouchListener(new AdapterView.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_MOVE) {
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-        mGridViewThird.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                positionSelected = position + mFaultThird;
-            }
-        });
-
-        mGridViewThird.setOnTouchListener(new AdapterView.OnTouchListener() {
+        mGridView.setOnTouchListener(new AdapterView.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -108,27 +64,15 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         pushButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i < 27; i++) {
-                    massSolved[i] = mAdapterSolverFirst.getItem(i);
-                }
-                for (int i = 27; i < 54; i++){
-                    massSolved[i] = mAdapterSolverSecond.getItem(i - 27);
-                }
-                for (int i = 54; i < 81; i++){
-                    massSolved[i] = mAdapterSolverThird.getItem(i - 54);
+                for (int i = 0; i < 81; i++) {
+                    massSolved[i] = mAdapterSolver.getItem(i);
                 }
                 if (mAlgorithm.IsEnterValid(massSolved)) {
                     mAlgorithm.solve(massSolved);
-                    for (int i = 0; i < 27; i++) {
-                        mAdapterSolverFirst.setItem(i, massSolved[i]);
+                    for (int i = 0; i < 81; i++) {
+                        mAdapterSolver.setItem(i, massSolved[i]);
                     }
-                    for (int i = 27; i < 54; i++){
-                        mAdapterSolverSecond.setItem(i - 27, massSolved[i]);
-                    }
-                    for (int i = 54; i < 81; i++){
-                        mAdapterSolverThird.setItem(i - 54, massSolved[i]);
-                    }
-                    mAdapterSolverFirst.setBaseMass(mAlgorithm.getMassInt());
+                    mAdapterSolver.setBaseMass(mAlgorithm.getMassInt());
                 } else
                     Toast.makeText(SolverActivity.this, "Invalid input1", Toast.LENGTH_SHORT).show();
             }
@@ -137,9 +81,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
 
     private void getUIItems() {
         pushButton = (Button) findViewById(R.id.push_button);
-        mGridViewFirst = (GridView) findViewById(R.id.field_first_line);
-        mGridViewSecond = (GridView) findViewById(R.id.field_seconf_line);
-        mGridViewThird = (GridView) findViewById(R.id.field_third_line);
+        mGridView = (GridView) findViewById(R.id.field_first_line);
         btn1 = (Button) findViewById(R.id.btn1);
         btn2 = (Button) findViewById(R.id.btn2);
         btn3 = (Button) findViewById(R.id.btn3);
@@ -153,17 +95,9 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initGridView(){
-        mGridViewFirst.setNumColumns(9);
-        mGridViewFirst.setEnabled(true);
-        mGridViewFirst.setAdapter(mAdapterSolverFirst);
-
-        mGridViewSecond.setNumColumns(9);
-        mGridViewSecond.setEnabled(true);
-        mGridViewSecond.setAdapter(mAdapterSolverSecond);
-
-        mGridViewThird.setNumColumns(9);
-        mGridViewThird.setEnabled(true);
-        mGridViewThird.setAdapter(mAdapterSolverThird);
+        mGridView.setNumColumns(9);
+        mGridView.setEnabled(true);
+        mGridView.setAdapter(mAdapterSolver);
     }
 
     private void setOnClickListener() {
@@ -181,45 +115,33 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn1:
-                checkForBtn(1);
+            case R.id.game_btn1:
+                mAdapterSolver.setItem(positionSelected, 1);
                 break;
-            case R.id.btn2:
-                checkForBtn(2);
+            case R.id.game_btn2:
+                mAdapterSolver.setItem(positionSelected, 2);
                 break;
-            case R.id.btn3:
-                checkForBtn(3);
+            case R.id.game_btn3:
+                mAdapterSolver.setItem(positionSelected, 3);
                 break;
-            case R.id.btn4:
-                checkForBtn(4);
+            case R.id.game_btn4:
+                mAdapterSolver.setItem(positionSelected, 4);
                 break;
-            case R.id.btn5:
-                checkForBtn(5);
+            case R.id.game_btn5:
+                mAdapterSolver.setItem(positionSelected, 5);
                 break;
-            case R.id.btn6:
-                checkForBtn(6);
+            case R.id.game_btn6:
+                mAdapterSolver.setItem(positionSelected, 6);
                 break;
-            case R.id.btn7:
-                checkForBtn(7);
+            case R.id.game_btn7:
+                mAdapterSolver.setItem(positionSelected, 7);
                 break;
-            case R.id.btn8:
-                checkForBtn(8);
+            case R.id.game_btn8:
+                mAdapterSolver.setItem(positionSelected, 8);
                 break;
-            case R.id.btn9:
-                checkForBtn(9);
+            case R.id.game_btn9:
+                mAdapterSolver.setItem(positionSelected, 9);
                 break;
-        }
-    }
-
-    private void checkForBtn (int valueof) {
-        if (positionSelected < 27) {
-            mAdapterSolverFirst.setItem(positionSelected, valueof);
-        }
-        if (positionSelected >= 27 && positionSelected < 54){
-            mAdapterSolverSecond.setItem(positionSelected - mFaultSecond, valueof);
-        }
-        if (positionSelected >= 54 && positionSelected < 81){
-            mAdapterSolverThird.setItem(positionSelected - mFaultThird, valueof);
         }
     }
 
@@ -242,9 +164,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.ButtonClear:
-                mAdapterSolverFirst.cleanMassInt();
-                mAdapterSolverSecond.cleanMassInt();
-                mAdapterSolverThird.cleanMassInt();
+                mAdapterSolver.cleanMassInt();
                 return true;
         }
         return super.onOptionsItemSelected(item);
