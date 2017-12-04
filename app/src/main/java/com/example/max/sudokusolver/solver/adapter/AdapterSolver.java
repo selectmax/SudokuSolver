@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.max.sudokusolver.R;
 
@@ -60,14 +62,14 @@ public class AdapterSolver extends BaseAdapter {
         return baseMass.get(i);
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     public void setItem(int index, Integer value) {
         baseMass.set(index, value);
         notifyDataSetChanged();
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
     }
 
     public ArrayList<Integer> getBaseMass() {
@@ -90,28 +92,37 @@ public class AdapterSolver extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        ViewHolder holder;
+
+       /* ImageView imageView;
+        if (view == null) {
+            imageView = new ImageView(mContext);
+            imageView.setMaxWidth(105);
+            imageView.setMaxHeight(105);
+        } else {
+            imageView = (ImageView) view;
+        } */
+
+        ImageView imageView;
        // RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(117, 117);
 
         if (view == null){
             view = mLayoutInflater.inflate(R.layout.grid_item_view, null);
-            holder = new ViewHolder();
-            holder.mNumberView = (ImageView) view.findViewById(R.id.imageView_number);
-           // params = new RelativeLayout.LayoutParams(117, 117);
-           // holder.mNumberView.setLayoutParams(params);
+            imageView = (ImageView) view.findViewById(R.id.imageView_number);
+          //  params = new RelativeLayout.LayoutParams(75, 75);
+          //  holder.mNumberView.setLayoutParams(params);
 
-            view.setTag(holder);
+            view.setTag(imageView);
         } else {
-            holder = (ViewHolder) view.getTag();
+            imageView = (ImageView) view.getTag();
         }
 
-        holder.mNumberView.setImageResource(mNubersMap.get(baseMass.get(position)));
+        imageView.setImageResource(mNubersMap.get(baseMass.get(position)));
 
         return view;
+
+       /* imageView.setImageResource(mNubersMap.get(baseMass.get(position)));
+
+        return imageView; */
     }
 
-
-    static class ViewHolder{
-        ImageView mNumberView;
-    }
 }

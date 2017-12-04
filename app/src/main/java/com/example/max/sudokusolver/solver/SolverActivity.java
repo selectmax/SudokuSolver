@@ -115,31 +115,31 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.game_btn1:
+            case R.id.btn1:
                 mAdapterSolver.setItem(positionSelected, 1);
                 break;
-            case R.id.game_btn2:
+            case R.id.btn2:
                 mAdapterSolver.setItem(positionSelected, 2);
                 break;
-            case R.id.game_btn3:
+            case R.id.btn3:
                 mAdapterSolver.setItem(positionSelected, 3);
                 break;
-            case R.id.game_btn4:
+            case R.id.btn4:
                 mAdapterSolver.setItem(positionSelected, 4);
                 break;
-            case R.id.game_btn5:
+            case R.id.btn5:
                 mAdapterSolver.setItem(positionSelected, 5);
                 break;
-            case R.id.game_btn6:
+            case R.id.btn6:
                 mAdapterSolver.setItem(positionSelected, 6);
                 break;
-            case R.id.game_btn7:
+            case R.id.btn7:
                 mAdapterSolver.setItem(positionSelected, 7);
                 break;
-            case R.id.game_btn8:
+            case R.id.btn8:
                 mAdapterSolver.setItem(positionSelected, 8);
                 break;
-            case R.id.game_btn9:
+            case R.id.btn9:
                 mAdapterSolver.setItem(positionSelected, 9);
                 break;
         }

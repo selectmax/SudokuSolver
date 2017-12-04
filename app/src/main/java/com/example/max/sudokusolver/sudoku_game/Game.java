@@ -2,14 +2,19 @@ package com.example.max.sudokusolver.sudoku_game;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.max.sudokusolver.Algorithm;
+import com.example.max.sudokusolver.R;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -23,10 +28,29 @@ class Game extends BaseAdapter {
     private final int mRows = 9, mCols = 9;
     private String number = " ";
     public int HowManyTimesRunned = 0;
+    private Map<Integer, Integer> mNubersMap;
+    private LayoutInflater mLayoutInflater;
 
 
     public Game(Context mContext) {
         this.mContext = mContext;
+        mNubersMap = new HashMap<>();
+        mLayoutInflater = LayoutInflater.from(mContext);
+        initArray();
+        initNumbersMap();
+    }
+
+    private void initNumbersMap(){
+        mNubersMap.put(0, R.drawable.o0);
+        mNubersMap.put(1, R.drawable.o1);
+        mNubersMap.put(2, R.drawable.o2);
+        mNubersMap.put(3, R.drawable.o3);
+        mNubersMap.put(4, R.drawable.o4);
+        mNubersMap.put(5, R.drawable.o5);
+        mNubersMap.put(6, R.drawable.o6);
+        mNubersMap.put(7, R.drawable.o7);
+        mNubersMap.put(8, R.drawable.o8);
+        mNubersMap.put(9, R.drawable.o9);
     }
 
     @Override
@@ -46,25 +70,24 @@ class Game extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        TextView textView;
-        if (view == null) {
-            textView = new TextView(mContext);
-            textView.setPadding(12, 6, 6, 12);
-            textView.setTextSize(22);
-            textView.setTextScaleX((float) 1.4);
+        ImageView imageView;
+        // RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(117, 117);
+
+        if (view == null){
+            view = mLayoutInflater.inflate(R.layout.grid_item_view, null);
+            imageView = (ImageView) view.findViewById(R.id.imageView_number);
+            //  params = new RelativeLayout.LayoutParams(75, 75);
+            //  holder.mNumberView.setLayoutParams(params);
+
+            view.setTag(imageView);
         } else {
-            textView = (TextView) view;
+            imageView = (ImageView) view.getTag();
         }
 
-        if (userBaseMass[position] == 0) {
-            number = " ";
-        } else {
-            number = String.valueOf(userBaseMass[position]);
-        }
+        Integer a = mNubersMap.get(userBaseMass[position]);
+        imageView.setImageResource(a);
 
-        textView.setText(number);
-
-        return textView;
+        return view;
     }
 
     /**
