@@ -7,15 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 
 class Game extends BaseAdapter {
@@ -140,7 +137,7 @@ class Game extends BaseAdapter {
      * - initArray вызывается снова, поле снова заполняется нулями и COUNTER_FIRST_RANDOM_FILL полей заполняется рандомно
      */
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 30; //Показатель степени рандомности исходного поля. 0-80
+        final int COUNTER_FIRST_RANDOM_FILL = 10; //Показатель степени рандомности исходного поля. 0-80
         int FilledCounter = 0;
         HowManyTimesRunned++;
         mGameAlgorithm = new Algorithm();
