@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="200dp">
+        android:layout_height="130dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -34,8 +34,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
+    <Button
+        android:id="@+id/continue_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/continue_btn_text"/>
 
     <Button
+        android:layout_marginTop="70dp"
         android:id="@+id/solve_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

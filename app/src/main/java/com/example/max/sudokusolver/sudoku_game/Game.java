@@ -1,6 +1,9 @@
 package com.example.max.sudokusolver.sudoku_game;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ class Game extends BaseAdapter {
     public int HowManyTimesRunned = 0;
     private Map<Integer, Integer> mNubersMap;
     private LayoutInflater mLayoutInflater;
+    DBHelper dbHelper;
 
 
     public Game(Context mContext) {
@@ -35,6 +39,7 @@ class Game extends BaseAdapter {
         mLayoutInflater = LayoutInflater.from(mContext);
         initArray();
         initNumbersMap();
+        dbHelper = new DBHelper(this.mContext);
     }
 
     private void initNumbersMap(){
@@ -199,4 +204,66 @@ class Game extends BaseAdapter {
             }
         }
     }
+
+    public void saveDB(){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        database.delete(DBHelper.TABLE_DATA, null, null);
+        ContentValues contentValues = new ContentValues();
+        for (int i = 0; i < 81; i++) {
+        contentValues.put(DBHelper.KEY_BM, baseMass[i]);
+        contentValues.put(DBHelper.KEY_USERBM, userBaseMass[i]);
+        if (blockedElements[i]) {contentValues.put(DBHelper.KEY_BLOCKED, 1);}
+            else contentValues.put(DBHelper.KEY_BLOCKED, 0);
+        database.insert(DBHelper.TABLE_DATA, null, contentValues);
+        }
+        dbHelper.close();
+    }
+
+    public void loadDB(){
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(DBHelper.TABLE_DATA, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
+            int bmIndex = cursor.getColumnIndex(DBHelper.KEY_BM);
+            int ubmIndex = cursor.getColumnIndex(DBHelper.KEY_USERBM);
+            int blockedIndex = cursor.getColumnIndex(DBHelper.KEY_BLOCKED);
+            for (int i = 0; i < 81; i++) {
+                baseMass[i] = cursor.getInt(bmIndex);
+                userBaseMass[i] = cursor.getInt(ubmIndex);
+                if (cursor.getInt(blockedIndex) == 1) blockedElements[i] = true;
+                else blockedElements[i] = false;
+                cursor.moveToNext();
+            }
+        } else Log.i("DBError", "cursor.moveToFirst() == false");
+        cursor.close();
+        dbHelper.close();
+    }
+
+    public void fakeloadDB(){
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+
+        Cursor cursor = database.query(DBHelper.TABLE_DATA, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
+            int bmIndex = cursor.getColumnIndex(DBHelper.KEY_BM);
+            int ubmIndex = cursor.getColumnIndex(DBHelper.KEY_USERBM);
+            int blockedIndex = cursor.getColumnIndex(DBHelper.KEY_BLOCKED);
+            do {
+                Log.i("fakeDB", "ID = " + cursor.getInt(idIndex)
+                        + ", baseMass[i] = " + cursor.getInt(bmIndex)
+                        + ", userBaseMass[i] = " + cursor.getInt(ubmIndex)
+                        + ", Blocked = " + cursor.getInt(blockedIndex));
+            } while (cursor.moveToNext());
+
+        } else Log.i("DBError", "FAKE cursor.moveToFirst() == false");
+        cursor.close();
+        dbHelper.close();
+        }
+
+
+    public void clearDB(){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        dbHelper.close();
+    }
+
 }

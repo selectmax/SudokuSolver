@@ -14,20 +14,16 @@ import com.example.max.sudokusolver.R;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GridView gameGridView;
-    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
+    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9,btnsavedb;
     private Game mGame;
-    private Integer[] massTask;
     private int positionSelected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-/**
- * Вытаскиваем из интента уровень сложности, который был выбран в меню. 0 - Easy, 1 - Normal или 2 - Hard.
- */
         Intent intent = getIntent();
         byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
-
+        boolean IsContinuation = intent.getBooleanExtra("Continue", false);
         setContentView(R.layout.activity_game);
         mGame = new Game(this);
         getUIItems();
@@ -36,10 +32,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGridView.setEnabled(true);
         gameGridView.setAdapter(mGame);
 
-/**
- * Инициализируем Массив с помощью initArray, создаем userBaseMass - массив элементов, которые отображаются пользователю;
- * Все обернуто в измерители времени для вычисления времени работы этих функций. Время непредсказуемое - зависит от рандома все.
-  */
+        if (IsContinuation) {
+        mGame.loadDB();
+        } else { //new game
         long start = System.currentTimeMillis();
         mGame.initArray();
         long mid = System.currentTimeMillis();
@@ -48,7 +43,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         long time1 = mid - start;
         long time2 = finish - mid;
         Toast toast = Toast.makeText(GameActivity.this, "Поле сгенерировано за " + time1 + " мс\n" + "Поле скрыто за " + time2 + " мс\n" + "Метод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_LONG);
-        toast.show();
+        toast.show();}
 
         gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,6 +65,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn7 = (Button) findViewById(R.id.game_btn7);
         btn8 = (Button) findViewById(R.id.game_btn8);
         btn9 = (Button) findViewById(R.id.game_btn9);
+        btnsavedb = (Button) findViewById(R.id.savedb);
     }
 
     private void setOnClickListener() {
@@ -82,6 +78,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn7.setOnClickListener(this);
         btn8.setOnClickListener(this);
         btn9.setOnClickListener(this);
+        btnsavedb.setOnClickListener(this);
     }
 
     @Override
@@ -113,6 +110,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.game_btn9:
                 mGame.setItem(positionSelected, 9);
+                break;
+            case R.id.savedb:
+                mGame.saveDB();
                 break;
         }
     }

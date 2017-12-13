@@ -14,7 +14,7 @@ import com.example.max.sudokusolver.sudoku_game.GameActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button mGameBtn;
+    private Button mGameBtn, mContinueBtn;
     private Button mSolveBtn;
     private Spinner spinner;
     private byte LevelOfDifficult;
@@ -51,9 +51,21 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MenuActivity.this, GameActivity.class);
                 intent.putExtra("LevelOfDifficult", LevelOfDifficult);
+                intent.putExtra("Continue", false);
                 startActivity(intent);
             }
         });
+
+        mContinueBtn = (Button) findViewById(R.id.continue_btn);
+        mContinueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, GameActivity.class);
+                intent.putExtra("Continue", true);
+                startActivity(intent);
+            }
+        });
+
 
         mSolveBtn = (Button) findViewById(R.id.solve_btn);
         mSolveBtn.setOnClickListener(new View.OnClickListener() {
