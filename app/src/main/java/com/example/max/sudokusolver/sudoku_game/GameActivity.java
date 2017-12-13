@@ -56,6 +56,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /*
     @Override
     public void onBackPressed() {
         // super.onBackPressed();
@@ -68,7 +69,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mGame.saveDB();
                 finish();
             }
         });
@@ -81,7 +81,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         quitDialog.show();
-    }
+    }*/
 
     private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
@@ -139,6 +139,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 mGame.setItem(positionSelected, 9);
                 break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        mGame.saveDB();
+        super.onStop();
     }
 
 

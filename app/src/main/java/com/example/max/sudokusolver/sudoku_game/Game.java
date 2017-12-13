@@ -230,7 +230,6 @@ class Game extends BaseAdapter {
     }
 
     public void loadDB(){
-        long startTime = System.currentTimeMillis();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         Cursor cursor = database.query(DBHelper.TABLE_DATA, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -248,35 +247,5 @@ class Game extends BaseAdapter {
         } else Log.i("DBError", "cursor.moveToFirst() == false");
         cursor.close();
         dbHelper.close();
-        long diff = System. currentTimeMillis() - startTime;
-        Log.i("Time", "Time of load DB = " + diff);
     }
-
-    public void fakeloadDB(){
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-
-        Cursor cursor = database.query(DBHelper.TABLE_DATA, null, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
-            int bmIndex = cursor.getColumnIndex(DBHelper.KEY_BM);
-            int ubmIndex = cursor.getColumnIndex(DBHelper.KEY_USERBM);
-            int blockedIndex = cursor.getColumnIndex(DBHelper.KEY_BLOCKED);
-            do {
-                Log.i("fakeDB", "ID = " + cursor.getInt(idIndex)
-                        + ", baseMass[i] = " + cursor.getInt(bmIndex)
-                        + ", userBaseMass[i] = " + cursor.getInt(ubmIndex)
-                        + ", Blocked = " + cursor.getInt(blockedIndex));
-            } while (cursor.moveToNext());
-
-        } else Log.i("DBError", "FAKE cursor.moveToFirst() == false");
-        cursor.close();
-        dbHelper.close();
-        }
-
-
-    public void clearDB(){
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        dbHelper.close();
-    }
-
 }
