@@ -230,6 +230,7 @@ class Game extends BaseAdapter {
     }
 
     public void loadDB(){
+        long startTime = System.currentTimeMillis();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         Cursor cursor = database.query(DBHelper.TABLE_DATA, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -247,6 +248,8 @@ class Game extends BaseAdapter {
         } else Log.i("DBError", "cursor.moveToFirst() == false");
         cursor.close();
         dbHelper.close();
+        long diff = System. currentTimeMillis() - startTime;
+        Log.i("Time", "Time of load DB = " + diff);
     }
 
     public void fakeloadDB(){

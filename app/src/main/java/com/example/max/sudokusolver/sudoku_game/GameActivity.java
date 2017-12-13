@@ -1,5 +1,7 @@
 package com.example.max.sudokusolver.sudoku_game;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +16,7 @@ import com.example.max.sudokusolver.R;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GridView gameGridView;
-    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9,btnsavedb;
+    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Game mGame;
     private int positionSelected = 0;
 
@@ -54,6 +56,33 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        openQuitDialog();
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(GameActivity.this);
+        quitDialog.setTitle(R.string.title_quit);
+        quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mGame.saveDB();
+                finish();
+            }
+        });
+
+        quitDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        quitDialog.show();
+    }
+
     private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
         btn1 = (Button) findViewById(R.id.game_btn1);
@@ -65,7 +94,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn7 = (Button) findViewById(R.id.game_btn7);
         btn8 = (Button) findViewById(R.id.game_btn8);
         btn9 = (Button) findViewById(R.id.game_btn9);
-        btnsavedb = (Button) findViewById(R.id.savedb);
     }
 
     private void setOnClickListener() {
@@ -78,7 +106,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn7.setOnClickListener(this);
         btn8.setOnClickListener(this);
         btn9.setOnClickListener(this);
-        btnsavedb.setOnClickListener(this);
     }
 
     @Override
@@ -110,9 +137,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.game_btn9:
                 mGame.setItem(positionSelected, 9);
-                break;
-            case R.id.savedb:
-                mGame.saveDB();
                 break;
         }
     }

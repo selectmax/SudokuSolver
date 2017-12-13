@@ -10,4 +10,7 @@
     <string name="difficulty_level_normal">Normal</string>
     <string name="difficulty_level_hard">Hard</string>
     <string name="difficulty_level">Difficulty Level</string>
+    <string name="title_quit">Do you want to save the game?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>

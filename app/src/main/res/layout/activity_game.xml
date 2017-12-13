@@ -27,13 +27,6 @@
             android:layout_height="109dp"
             android:orientation="vertical">
 
-
-            <Button
-                android:id="@+id/savedb"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="saveDB" />
-
         </LinearLayout>
 
         <LinearLayout
