@@ -206,17 +206,27 @@ class Game extends BaseAdapter {
     }
 
     public void saveDB(){
+        long startTime = System.currentTimeMillis();
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         database.delete(DBHelper.TABLE_DATA, null, null);
-        ContentValues contentValues = new ContentValues();
-        for (int i = 0; i < 81; i++) {
-        contentValues.put(DBHelper.KEY_BM, baseMass[i]);
-        contentValues.put(DBHelper.KEY_USERBM, userBaseMass[i]);
-        if (blockedElements[i]) {contentValues.put(DBHelper.KEY_BLOCKED, 1);}
-            else contentValues.put(DBHelper.KEY_BLOCKED, 0);
-        database.insert(DBHelper.TABLE_DATA, null, contentValues);
+        database.beginTransaction();
+        try {
+            ContentValues contentValues = new ContentValues();
+            for (int i = 0; i < 81; i++) {
+                contentValues.put(DBHelper.KEY_BM, baseMass[i]);
+                contentValues.put(DBHelper.KEY_USERBM, userBaseMass[i]);
+                if (blockedElements[i]) {
+                    contentValues.put(DBHelper.KEY_BLOCKED, 1);
+                } else contentValues.put(DBHelper.KEY_BLOCKED, 0);
+                database.insert(DBHelper.TABLE_DATA, null, contentValues);
+            }
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
         }
         dbHelper.close();
+        long diff = System. currentTimeMillis() - startTime;
+        Log.i("Time", "Time of save to DB = " + diff);
     }
 
     public void loadDB(){
