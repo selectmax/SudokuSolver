@@ -9,16 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity">
+
+        <activity android:name=".MenuActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".sudoku_game.GameActivity">
+
+        <activity android:name=".sudoku_game.GameActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".solver.SolverActivity">
+
+        <activity android:name=".solver.SolverActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

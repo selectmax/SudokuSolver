@@ -6,4 +6,12 @@
     <string name="game_btn_text">Игра</string>
     <string name="solve_btn_text">Решить</string>
     <string name="hello_text">Добро пожаловать в мир судоку!</string>
+    <string name="continue_btn_text">Продолжить</string>
+    <string name="difficulty_level_easy">Легкий</string>
+    <string name="difficulty_level_normal">Средний</string>
+    <string name="difficulty_level_hard">Сложный</string>
+    <string name="difficulty_level">Уровень сложности</string>
+    <string name="title_quit">Сохранить игру?</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
 </resources>
