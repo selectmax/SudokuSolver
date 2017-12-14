@@ -147,5 +147,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
     }
 
+    public void makeShortToast(String mToast){
+        Toast toast = Toast.makeText(GameActivity.this, mToast, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
 
 }

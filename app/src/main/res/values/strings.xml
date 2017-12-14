@@ -13,4 +13,8 @@
     <string name="title_quit">Do you want to save the game?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="error_blocked_element">The field is unavailable for change</string>
+    <string name="title_congrats">Congratulations! Start a new game?</string>
+    <string name="newgame">New Game</string>
+    <string name="exit">Exit</string>
 </resources>

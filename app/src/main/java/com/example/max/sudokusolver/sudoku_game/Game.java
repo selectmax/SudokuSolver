@@ -1,7 +1,9 @@
 package com.example.max.sudokusolver.sudoku_game;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
@@ -31,6 +34,7 @@ class Game extends BaseAdapter {
     private Map<Integer, Integer> mNubersMap;
     private LayoutInflater mLayoutInflater;
     DBHelper dbHelper;
+    private byte lvl = 1;
 
 
     public Game(Context mContext) {
@@ -110,14 +114,34 @@ class Game extends BaseAdapter {
                 Log.i("MyTag", "Элемент не валидный");
             }
             if (sudokuIsSolved()) {
-                //Выкинуть поздравление - судоку решено!
-                Log.i("Congrats", "Судоку решено");
+               openCongratsDialog();
             }
         } else {
-            Log.i("MyTag", "Попытка изменить число, но найден blockedElement == true");
+            Toast toast = Toast.makeText(mContext, R.string.error_blocked_element, Toast.LENGTH_SHORT);
+            toast.show();
         }
         notifyDataSetChanged();
     }
+
+    private void openCongratsDialog() {
+        AlertDialog.Builder congratsDialog = new AlertDialog.Builder(mContext);
+        congratsDialog.setTitle(R.string.title_congrats);
+        congratsDialog.setPositiveButton(R.string.newgame, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                initArray();
+                initUserBaseMass(lvl);
+            }
+        });
+
+        congratsDialog.setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Перейти в главное меню
+            }
+        });
+
+        congratsDialog.show();}
 
     private boolean sudokuIsSolved() {
         for (int i = 0; i < 81; i++) {
@@ -177,16 +201,17 @@ class Game extends BaseAdapter {
      *                         вычитается единица из кол-ва элементов для открытия - для работы цикла
      */
     public void initUserBaseMass(byte levelOfDifficult) {
-        byte HowManyElementsNeedToOpen = 60;
+        lvl = levelOfDifficult;
+        byte HowManyElementsNeedToOpen = 51;
         switch (levelOfDifficult) {
             case 0:
-                HowManyElementsNeedToOpen = 70;
+                HowManyElementsNeedToOpen = 51; //51
                 break;
             case 1:
-                HowManyElementsNeedToOpen = 60;
+                HowManyElementsNeedToOpen = 36; //36
                 break;
             case 2:
-                HowManyElementsNeedToOpen = 50;
+                HowManyElementsNeedToOpen = 31; //31
                 break;
         }
         for (int i = 0; i < 81; i++) {
