@@ -3,6 +3,7 @@ package com.example.max.sudokusolver.sudoku_game;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -24,7 +25,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
+        Byte LevelOfDifficult = intent.getByteExtra("LevelOfDifficult", (byte) 1); //в LevelOfDifficult хранится уровень сложности 0, 1 или 2
+        Byte[] LevelOfDiff = {LevelOfDifficult};
         boolean IsContinuation = intent.getBooleanExtra("Continue", false);
         setContentView(R.layout.activity_game);
         mGame = new Game(this);
@@ -37,15 +39,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (IsContinuation) {
         mGame.loadDB();
         } else { //new game
-        long start = System.currentTimeMillis();
-        mGame.initArray();
-        long mid = System.currentTimeMillis();
-        mGame.initUserBaseMass(LevelOfDifficult);
-        long finish = System.currentTimeMillis();
-        long time1 = mid - start;
-        long time2 = finish - mid;
-        Toast toast = Toast.makeText(GameActivity.this, "Поле сгенерировано за " + time1 + " мс\n" + "Поле скрыто за " + time2 + " мс\n" + "Метод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_LONG);
-        toast.show();}
+            try {
+                new StartGame().execute(LevelOfDiff);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,33 +54,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+        class StartGame extends AsyncTask<Byte, Void, Void> {
 
-    /*
-    @Override
-    public void onBackPressed() {
-        // super.onBackPressed();
-        openQuitDialog();
-    }
-
-    private void openQuitDialog() {
-        AlertDialog.Builder quitDialog = new AlertDialog.Builder(GameActivity.this);
-        quitDialog.setTitle(R.string.title_quit);
-        quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
+            protected Void doInBackground(Byte... LevelOfDiff) {
 
-        quitDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
+                try {
+                    long start = System.currentTimeMillis();
+                    mGame.initArray();
+                    long mid = System.currentTimeMillis();
+                    for (Byte LevelOfDiffa : LevelOfDiff) {
+                    mGame.initUserBaseMass(LevelOfDiffa);}
+                    long finish = System.currentTimeMillis();
+                    long time1 = mid - start;
+                    long time2 = finish - mid;
+                    Toast toast = Toast.makeText(GameActivity.this, "Поле сгенерировано за " + time1 + " мс\n" + "Поле скрыто за " + time2 + " мс\n" + "Метод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_LONG);
+                    toast.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
-        });
-
-        quitDialog.show();
-    }*/
+        }
 
     private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
@@ -145,6 +139,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStop() {
         mGame.saveDB();
         super.onStop();
+    }
+
+    public void killActivity() {
+        finish();
     }
 
     public void makeShortToast(String mToast){

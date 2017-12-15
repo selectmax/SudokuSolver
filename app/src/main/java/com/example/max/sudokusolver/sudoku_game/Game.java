@@ -137,10 +137,9 @@ class Game extends BaseAdapter {
         congratsDialog.setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Перейти в главное меню
+                ((GameActivity) mContext).finish();
             }
         });
-
         congratsDialog.show();}
 
     private boolean sudokuIsSolved() {
@@ -151,22 +150,8 @@ class Game extends BaseAdapter {
         return true;
     }
 
-    /**
-     * Метод инициализирует массив baseMass рандомно, но стопудово решаемо. Время работы - не ограничено,
-     * работает до тех пор пока не решится или не вылетит.
-     * HowManyTimesRunned - просто считает сколько раз запущен сам метод.
-     * Присутствует рекурсия, метод может быть вызван очень много раз.
-     * Сначала массив заполняется нулями. Чтобы во время дальнейших проверок не было ошибок с null;
-     * Далее пока FilledCounter (счетчик заполненных элементов) не сравнялся с заданным параметром COUNTER_FIRST_RANDOM_FILL
-     * рандомно загадывается поле (от 0 до 80), рандомно загадывается значение (от 1 до 9),
-     * далее если элемент baseMass с рандомно загаданным номером еще пока равен нулю - он заполняется загаданным числом randomValue;
-     * Далее с помощью usElementValid проверяется валидно ли поставленное значение, если нет - оно стирается в 0 снова.
-     *
-     * Если заполняется COUNTER_FIRST_RANDOM_FILL полей, то цикл заканчивается и .solve решает это поле. Если решить не удается
-     * - initArray вызывается снова, поле снова заполняется нулями и COUNTER_FIRST_RANDOM_FILL полей заполняется рандомно
-     */
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 10; //Показатель степени рандомности исходного поля. 0-80
+        final int COUNTER_FIRST_RANDOM_FILL = 20; //Показатель степени рандомности исходного поля. 0-80
         int FilledCounter = 0;
         HowManyTimesRunned++;
         mGameAlgorithm = new Algorithm();
@@ -192,15 +177,7 @@ class Game extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * @param levelOfDifficult - выбранная сложность 0, 1 или 2
-     *   В switch сложность переводится в HowManyElementsNeedToOpen (сколько элементов нужно открыть)
-     *   Все элементы userBaseMass из null переводятся в 0, блокировка снимается (все поля доступны к редактированию юзером)
-     *   в while загадывается рандомное поле и проверяется, если это поле пока еще не заполнено - оно копируется из baseMass,
-     *                        после чего устанавливается блокировка поля - пользователь его редактировать не может,
-     *                         вычитается единица из кол-ва элементов для открытия - для работы цикла
-     */
-    public void initUserBaseMass(byte levelOfDifficult) {
+    public void initUserBaseMass(Byte levelOfDifficult) {
         lvl = levelOfDifficult;
         byte HowManyElementsNeedToOpen = 51;
         switch (levelOfDifficult) {
