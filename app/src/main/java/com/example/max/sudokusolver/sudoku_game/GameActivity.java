@@ -1,16 +1,13 @@
 package com.example.max.sudokusolver.sudoku_game;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.example.max.sudokusolver.R;
 
@@ -20,6 +17,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Game mGame;
     private int positionSelected = 0;
+    private int[] testStatus;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,49 +35,32 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGridView.setEnabled(true);
         gameGridView.setAdapter(mGame);
 
+        testStatus = new int[100];
+        for (int i = 0; i < 100; i++) {
+            testStatus[i] = i + 1;
+        }
+
         if (IsContinuation) {
-        mGame.loadDB();
+            mGame.loadDB();
         } else { //new game
-            try {
-                new StartGame().execute(LevelOfDiff);
-            } catch (Exception e) {
-                e.printStackTrace();
+            mGame.initArray();
+            for (Byte LevelOfDiffa : LevelOfDiff) {
+                mGame.initUserBaseMass(LevelOfDiffa);
             }
-        }
 
-        gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                positionSelected = position;
-            }
-        });
-
-    }
-        class StartGame extends AsyncTask<Byte, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Byte... LevelOfDiff) {
-
-                try {
-                    long start = System.currentTimeMillis();
-                    mGame.initArray();
-                    long mid = System.currentTimeMillis();
-                    for (Byte LevelOfDiffa : LevelOfDiff) {
-                    mGame.initUserBaseMass(LevelOfDiffa);}
-                    long finish = System.currentTimeMillis();
-                    long time1 = mid - start;
-                    long time2 = finish - mid;
-                    Toast toast = Toast.makeText(GameActivity.this, "Поле сгенерировано за " + time1 + " мс\n" + "Поле скрыто за " + time2 + " мс\n" + "Метод initArray запущен раз: " + mGame.HowManyTimesRunned, Toast.LENGTH_LONG);
-                    toast.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    positionSelected = position;
                 }
-                return null;
-            }
+            });
+
         }
+    }
 
     private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
+        mProgressBar = (ProgressBar) findViewById(R.id.indicator);
         btn1 = (Button) findViewById(R.id.game_btn1);
         btn2 = (Button) findViewById(R.id.game_btn2);
         btn3 = (Button) findViewById(R.id.game_btn3);
@@ -140,15 +122,4 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mGame.saveDB();
         super.onStop();
     }
-
-    public void killActivity() {
-        finish();
-    }
-
-    public void makeShortToast(String mToast){
-        Toast toast = Toast.makeText(GameActivity.this, mToast, Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-
 }

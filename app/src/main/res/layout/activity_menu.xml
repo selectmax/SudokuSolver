@@ -47,4 +47,12 @@
         android:layout_height="wrap_content"
         android:text="@string/solve_btn_text"/>
 
+    <ProgressBar
+        android:id="@+id/indicator"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="0" />
+
 </LinearLayout>

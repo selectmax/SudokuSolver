@@ -24,7 +24,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-
         String[] diff = {getString(R.string.difficulty_level_easy), getString(R.string.difficulty_level_normal), getString(R.string.difficulty_level_hard)};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, diff);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -33,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         spinner.setPrompt(getString(R.string.difficulty_level));
         spinner.setSelection(1);
         LevelOfDifficult = 1;
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
