@@ -22,7 +22,7 @@ public class SudokuArray {
 
     private SudokuArray(){
         mElements = new ArrayList<>(81);
-        Element element = new Element();
+        Element element = new Element(0, 0, false);
         for (int i = 0; i < 81; i++){
             mElements.add(i, element);
         }
@@ -49,15 +49,30 @@ public class SudokuArray {
     }
 
     public void setByIndexBaseElement(int index, int value){
-        mElements.get(index).setBaseElement(value);
+       // mElements.get(index).setBaseElement(value);
+        Element element = new Element(0, 0, false);
+        element.setUserElement(mElements.get(index).getUserElement());
+        element.setBlockedElement(mElements.get(index).getBlockedElement());
+        element.setBaseElement(value);
+        mElements.set(index, element);
     }
 
     public void setByIndexBlockElement(int index, boolean value){
-        mElements.get(index).setBlockedElement(value);
+        //mElements.get(index).setBlockedElement(value);
+        Element element = new Element(0, 0, false);
+        element.setBaseElement(mElements.get(index).getBaseElement());
+        element.setUserElement(mElements.get(index).getUserElement());
+        element.setBlockedElement(value);
+        mElements.set(index, element);
     }
 
     public void setByIndexUserElement(int index, int value){
-        mElements.get(index).setUserElement(value);
+        //mElements.get(index).setUserElement(value);
+        Element element = new Element(0, 0, false);
+        element.setBaseElement(mElements.get(index).getBaseElement());
+        element.setBlockedElement(mElements.get(index).getBlockedElement());
+        element.setUserElement(value);
+        mElements.set(index, element);
     }
 
     public int getByIndexBaseElement(int index){

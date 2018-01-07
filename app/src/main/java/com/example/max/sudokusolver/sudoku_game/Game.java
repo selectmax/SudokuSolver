@@ -167,8 +167,8 @@ public class Game extends BaseAdapter {
     }
 
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 1; //Показатель степени рандомности исходного поля. 0-80
-        int FilledCounter = 0;
+        final int COUNTER_FIRST_RANDOM_FILL = 30; //Показатель степени рандомности исходного поля. 0-80
+        int filledCounter = 0;
         HowManyTimesRunned++;
         mGameAlgorithm = new Algorithm();
        // for (int i = 0; i < baseMass.length; i++) {
@@ -178,7 +178,7 @@ public class Game extends BaseAdapter {
             mSudokuArray.setByIndexBaseElement(i, 0);
         }
 
-        while (FilledCounter <= COUNTER_FIRST_RANDOM_FILL) {
+        while (filledCounter <= COUNTER_FIRST_RANDOM_FILL) {
             int randomField;
             int randomValue;
             Random random = new Random();
@@ -188,10 +188,11 @@ public class Game extends BaseAdapter {
             if (mSudokuArray.getByIndexBaseElement(randomField) == 0) mSudokuArray.setByIndexBaseElement(randomField, randomValue);
          //   if (!mGameAlgorithm.IsElementValid(baseMass, randomField)) {
          //       baseMass[randomField] = 0;
-         //   } else FilledCounter++;
-            if (!mGameAlgorithm.IsElementValid(mSudokuArray.getBaseElementMass(), randomField)){
+         //   } else filledCounter++;
+            boolean a = mGameAlgorithm.IsElementValid(mSudokuArray.getBaseElementMass(), randomField);
+            if (!a){
                 mSudokuArray.setByIndexBaseElement(randomField, 0);
-            } else FilledCounter++;
+            } else filledCounter++;
         }
         if (!mGameAlgorithm.solve(mSudokuArray.getBaseElementMass())) {
             initArray();

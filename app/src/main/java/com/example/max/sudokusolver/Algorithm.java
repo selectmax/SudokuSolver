@@ -1,7 +1,5 @@
 package com.example.max.sudokusolver;
 
-import android.util.Log;
-
 public class Algorithm {
 
     private Integer[] massInt;
@@ -97,7 +95,8 @@ public class Algorithm {
                 if ((mass[startOfSquare + j2 + (j * 9)].equals(mass[i])) && (i != (startOfSquare + j2 + (j * 9))))
                     return false;
             }
-        } return true;
+        }
+        return true;
     }
 
 

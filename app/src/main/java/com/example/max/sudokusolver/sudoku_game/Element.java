@@ -12,6 +12,15 @@ public class Element {
 
     private boolean blockedElement;
 
+    public Element() {
+    }
+
+    public Element(Integer baseElement, Integer userElement, boolean blockedElement) {
+        this.baseElement = baseElement;
+        this.userElement = userElement;
+        this.blockedElement = blockedElement;
+    }
+
     public Integer getBaseElement() {
         return baseElement;
     }
