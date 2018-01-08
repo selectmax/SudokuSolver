@@ -1,6 +1,7 @@
 package com.example.max.sudokusolver;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
     private byte levelOfDifficult;
     private SudokuArray mSudokuArray;
     private ProgressDialog mProgressDialog;
+    private InitializeArray mInitializeArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,19 @@ public class MenuActivity extends AppCompatActivity {
         spinner.setPrompt(getString(R.string.difficulty_level));
         spinner.setSelection(1);
         levelOfDifficult = 1;
+        mInitializeArray = new InitializeArray();
 
         mSudokuArray = SudokuArray.getInstance();
        // mProgressDialog = new ProgressDialog(this, R.style.AsyncTheme);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+        mProgressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mInitializeArray.cancel(true);
+            }
+        });
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -60,7 +69,7 @@ public class MenuActivity extends AppCompatActivity {
         mGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new InitializeArray().execute();
+                mInitializeArray.execute();
             }
         });
 
