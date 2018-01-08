@@ -36,10 +36,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (IsContinuation) {
             mGame.loadDB();
         } else { //new game
-            mGame.initArray();
-            for (Byte LevelOfDiffa : LevelOfDiff) {
-                mGame.initUserBaseMass(LevelOfDiffa);
-            }
+           // mGame.initArray();
+           // for (Byte LevelOfDiffa : LevelOfDiff) {
+           //     mGame.initUserBaseMass(LevelOfDiffa);
+           // }
 
             gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

@@ -19,7 +19,6 @@ import com.example.max.sudokusolver.R;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class Game extends BaseAdapter {
 
@@ -38,13 +37,9 @@ public class Game extends BaseAdapter {
         this.mContext = mContext;
         mNubersMap = new HashMap<>();
         mLayoutInflater = LayoutInflater.from(mContext);
-        //initArray();
+        mSudokuArray = SudokuArray.getInstance();
         initNumbersMap();
         dbHelper = new DBHelper(this.mContext);
-    }
-
-    public Game(){
-        mSudokuArray = SudokuArray.getInstance();
     }
 
     private void initNumbersMap(){
@@ -129,8 +124,8 @@ public class Game extends BaseAdapter {
         congratsDialog.setPositiveButton(R.string.newgame, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                initArray();
-                initUserBaseMass(lvl);
+                mSudokuArray.initArray();
+                mSudokuArray.initUserBaseMass(lvl);
             }
         });
 
@@ -148,63 +143,6 @@ public class Game extends BaseAdapter {
                 return false;
         }
         return true;
-    }
-
-    public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 40; //Показатель степени рандомности исходного поля. 0-80
-        int filledCounter = 0;
-        HowManyTimesRunned++;
-        mGameAlgorithm = new Algorithm();
-        for (int i = 0; i < 81; i++){
-            mSudokuArray.setByIndexBaseElement(i, 0);
-        }
-
-        while (filledCounter <= COUNTER_FIRST_RANDOM_FILL) {
-            int randomField;
-            int randomValue;
-            Random random = new Random();
-            randomField = random.nextInt(81);
-            randomValue = (random.nextInt(9) + 1);
-            if (mSudokuArray.getByIndexBaseElement(randomField) == 0) mSudokuArray.setByIndexBaseElement(randomField, randomValue);
-            boolean a = mGameAlgorithm.IsElementValid(mSudokuArray.getBaseElementMass(), randomField);
-            if (!a){
-                mSudokuArray.setByIndexBaseElement(randomField, 0);
-            } else filledCounter++;
-        }
-        if (!mGameAlgorithm.solve(mSudokuArray.getBaseElementMass())) {
-            initArray();
-        }
-        notifyDataSetChanged();
-    }
-
-    public void initUserBaseMass(Byte levelOfDifficult) {
-        lvl = levelOfDifficult;
-        byte HowManyElementsNeedToOpen = 51;
-        switch (levelOfDifficult) {
-            case 0:
-                HowManyElementsNeedToOpen = 60; //51
-                break;
-            case 1:
-                HowManyElementsNeedToOpen = 36; //36
-                break;
-            case 2:
-                HowManyElementsNeedToOpen = 31; //31
-                break;
-        }
-        for (int i = 0; i < 81; i++) {
-            mSudokuArray.setByIndexUserElement(i, 0);
-            mSudokuArray.setByIndexBlockElement(i, false);
-        }
-        while (HowManyElementsNeedToOpen != 0) {
-            int randomField;
-            Random random = new Random();
-            randomField = random.nextInt(81);
-            if (mSudokuArray.getByIndexUserElement(randomField) == 0) {
-                mSudokuArray.setByIndexUserElement(randomField, mSudokuArray.getByIndexBaseElement(randomField));
-                mSudokuArray.setByIndexBlockElement(randomField, true);
-                HowManyElementsNeedToOpen--;
-            }
-        }
     }
 
     public void saveDB(){

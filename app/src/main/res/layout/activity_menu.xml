@@ -47,10 +47,4 @@
         android:layout_height="wrap_content"
         android:text="@string/solve_btn_text"/>
 
-    <ProgressBar
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"/>
-
 </LinearLayout>

@@ -5,18 +5,15 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.max.sudokusolver.solver.SolverActivity;
-import com.example.max.sudokusolver.sudoku_game.Game;
 import com.example.max.sudokusolver.sudoku_game.GameActivity;
+import com.example.max.sudokusolver.sudoku_game.SudokuArray;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -24,9 +21,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button mSolveBtn;
     private Spinner spinner;
     private byte levelOfDifficult;
-    private ProgressBar mProgressBar;
-    private Game mGame;
-    private LayoutInflater mLayoutInflater;
+    private SudokuArray mSudokuArray;
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -38,15 +33,12 @@ public class MenuActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, diff);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner = (Spinner) findViewById(R.id.difficulty_level_spinner);
-        mProgressBar = (ProgressBar) findViewById(R.id.indicator);
-        mProgressBar.setVisibility(View.INVISIBLE);
         spinner.setAdapter(adapter);
         spinner.setPrompt(getString(R.string.difficulty_level));
         spinner.setSelection(1);
         levelOfDifficult = 1;
 
-        mLayoutInflater = LayoutInflater.from(this);
-        mGame = new Game();
+        mSudokuArray = SudokuArray.getInstance();
         mProgressDialog = new ProgressDialog(this, R.style.AsyncTheme);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
@@ -68,10 +60,6 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new InitializeArray().execute();
-               /* Intent intent = new Intent(MenuActivity.this, GameActivity.class);
-                intent.putExtra("levelOfDifficult", levelOfDifficult);
-                intent.putExtra("Continue", false);
-                startActivity(intent); */
             }
         });
 
@@ -100,8 +88,8 @@ public class MenuActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mGame.initArray();
-            mGame.initUserBaseMass(levelOfDifficult);
+            mSudokuArray.initArray();
+            mSudokuArray.initUserBaseMass(levelOfDifficult);
             return null;
         }
 
@@ -114,7 +102,8 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             mProgressDialog.cancel();
-            Toast.makeText(MenuActivity.this, "Задача завершена", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MenuActivity.this, GameActivity.class);
+            startActivity(intent);
         }
     }
 }
