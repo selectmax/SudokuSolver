@@ -94,6 +94,10 @@ public class MenuActivity extends AppCompatActivity {
             return null;
         }
 
+        /** метод перед вызовом второго потока
+         * в данный момент, то есть перед вызовом второго потока
+         * на экран вылетает окно с загрузкой
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -101,6 +105,11 @@ public class MenuActivity extends AppCompatActivity {
             mProgressDialog.show();
         }
 
+        /**
+         * метод после выполнения второго потока
+         *
+         * по завершению убирается диалоговое окно и запускается игра
+         */
         @Override
         protected void onPostExecute(Void aVoid) {
             mProgressDialog.cancel();
