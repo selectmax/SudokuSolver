@@ -50,6 +50,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mInitializeArray.cancel(true);
+                mInitializeArray = new InitializeArray();
             }
         });
 
@@ -92,6 +93,12 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mInitializeArray = new InitializeArray();
     }
 
     public class InitializeArray extends AsyncTask<Void, Integer, Void>{
