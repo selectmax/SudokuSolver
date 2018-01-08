@@ -36,16 +36,15 @@ public class Game extends BaseAdapter {
 
     public Game(Context mContext) {
         this.mContext = mContext;
-        mSudokuArray = SudokuArray.getInstance();
         mNubersMap = new HashMap<>();
         mLayoutInflater = LayoutInflater.from(mContext);
-        initArray();
+        //initArray();
         initNumbersMap();
         dbHelper = new DBHelper(this.mContext);
     }
 
     public Game(){
-        initArray();
+        mSudokuArray = SudokuArray.getInstance();
     }
 
     private void initNumbersMap(){
@@ -152,7 +151,7 @@ public class Game extends BaseAdapter {
     }
 
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 5; //Показатель степени рандомности исходного поля. 0-80
+        final int COUNTER_FIRST_RANDOM_FILL = 40; //Показатель степени рандомности исходного поля. 0-80
         int filledCounter = 0;
         HowManyTimesRunned++;
         mGameAlgorithm = new Algorithm();

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 
 import com.example.max.sudokusolver.R;
 
@@ -18,7 +17,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Game mGame;
     private int positionSelected = 0;
     private int[] testStatus;
-    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +32,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGridView.setNumColumns(9);
         gameGridView.setEnabled(true);
         gameGridView.setAdapter(mGame);
-
-        testStatus = new int[100];
-        for (int i = 0; i < 100; i++) {
-            testStatus[i] = i + 1;
-        }
 
         if (IsContinuation) {
             mGame.loadDB();
@@ -60,7 +53,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
-        mProgressBar = (ProgressBar) findViewById(R.id.indicator);
         btn1 = (Button) findViewById(R.id.game_btn1);
         btn2 = (Button) findViewById(R.id.game_btn2);
         btn3 = (Button) findViewById(R.id.game_btn3);
