@@ -21,15 +21,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-class Game extends BaseAdapter {
+public class Game extends BaseAdapter {
 
-    private Integer[] baseMass = new Integer[81]; //Массив хранения актуальных игровых цифр
-    public Integer[] userBaseMass = new Integer[81]; //Массив хранения пользовательской догадки
-    private Boolean[] blockedElements = new Boolean[81]; //Массив хранения меток блокирования элементов. 1 - элемент задания, недоступен для редактирования, 0 - элемент доступный для изменения
+    private SudokuArray mSudokuArray;
     private Context mContext;
     private Algorithm mGameAlgorithm;
     private final int mRows = 9, mCols = 9;
-    private String number = " ";
     public int HowManyTimesRunned = 0;
     private Map<Integer, Integer> mNubersMap;
     private LayoutInflater mLayoutInflater;
@@ -39,11 +36,16 @@ class Game extends BaseAdapter {
 
     public Game(Context mContext) {
         this.mContext = mContext;
+        mSudokuArray = SudokuArray.getInstance();
         mNubersMap = new HashMap<>();
         mLayoutInflater = LayoutInflater.from(mContext);
         initArray();
         initNumbersMap();
         dbHelper = new DBHelper(this.mContext);
+    }
+
+    public Game(){
+        initArray();
     }
 
     private void initNumbersMap(){
@@ -66,7 +68,7 @@ class Game extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return baseMass[position];
+        return mSudokuArray.getByIndexBaseElement(position);
     }
 
     @Override
@@ -77,20 +79,20 @@ class Game extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         ImageView imageView;
-        // RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(117, 117);
 
         if (view == null){
             view = mLayoutInflater.inflate(R.layout.grid_item_view, null);
             imageView = (ImageView) view.findViewById(R.id.imageView_number);
-            //  params = new RelativeLayout.LayoutParams(75, 75);
-            //  holder.mNumberView.setLayoutParams(params);
-
             view.setTag(imageView);
         } else {
             imageView = (ImageView) view.getTag();
         }
 
-        Integer a = mNubersMap.get(userBaseMass[position]);
+        Integer a = mNubersMap.get(mSudokuArray.getByIndexUserElement(position));
+        if (a == null){
+            initNumbersMap();
+            a = mNubersMap.get(mSudokuArray.getByIndexUserElement(position));
+        }
         imageView.setImageResource(a);
 
         return view;
@@ -106,11 +108,10 @@ class Game extends BaseAdapter {
      *          то выдается поздравление!
      */
     public void setItem(int positionSelected, int i) {
-        if (!blockedElements[positionSelected]) {
-            userBaseMass[positionSelected] = i;
+        if (!mSudokuArray.getByIndexBlockElement(positionSelected)) {
+            mSudokuArray.setByIndexUserElement(positionSelected, i);
             Log.i("MyTag", "Число изменено");
-            if (userBaseMass[positionSelected] != baseMass[positionSelected]) {
-                //показывать или не показывать подсказку, что элемент неверный? Цветом, выделением?
+            if (mSudokuArray.getByIndexUserElement(positionSelected) != mSudokuArray.getByIndexBaseElement(positionSelected)) {
                 Log.i("MyTag", "Элемент не валидный");
             }
             if (sudokuIsSolved()) {
@@ -144,36 +145,36 @@ class Game extends BaseAdapter {
 
     private boolean sudokuIsSolved() {
         for (int i = 0; i < 81; i++) {
-            if (!userBaseMass[i].equals(baseMass[i]))
+            if (! (mSudokuArray.getByIndexUserElement(i) == (mSudokuArray.getByIndexBaseElement(i))))
                 return false;
         }
         return true;
     }
 
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 20; //Показатель степени рандомности исходного поля. 0-80
-        int FilledCounter = 0;
+        final int COUNTER_FIRST_RANDOM_FILL = 5; //Показатель степени рандомности исходного поля. 0-80
+        int filledCounter = 0;
         HowManyTimesRunned++;
         mGameAlgorithm = new Algorithm();
-        for (int i = 0; i < baseMass.length; i++) {
-            baseMass[i] = 0;
+        for (int i = 0; i < 81; i++){
+            mSudokuArray.setByIndexBaseElement(i, 0);
         }
 
-        while (FilledCounter <= COUNTER_FIRST_RANDOM_FILL) {
+        while (filledCounter <= COUNTER_FIRST_RANDOM_FILL) {
             int randomField;
             int randomValue;
             Random random = new Random();
             randomField = random.nextInt(81);
             randomValue = (random.nextInt(9) + 1);
-            if (baseMass[randomField] == 0) baseMass[randomField] = randomValue;
-            if (!mGameAlgorithm.IsElementValid(baseMass, randomField)) {
-                baseMass[randomField] = 0;
-            } else FilledCounter++;
+            if (mSudokuArray.getByIndexBaseElement(randomField) == 0) mSudokuArray.setByIndexBaseElement(randomField, randomValue);
+            boolean a = mGameAlgorithm.IsElementValid(mSudokuArray.getBaseElementMass(), randomField);
+            if (!a){
+                mSudokuArray.setByIndexBaseElement(randomField, 0);
+            } else filledCounter++;
         }
-        if (!mGameAlgorithm.solve(baseMass)) {
+        if (!mGameAlgorithm.solve(mSudokuArray.getBaseElementMass())) {
             initArray();
         }
-
         notifyDataSetChanged();
     }
 
@@ -182,7 +183,7 @@ class Game extends BaseAdapter {
         byte HowManyElementsNeedToOpen = 51;
         switch (levelOfDifficult) {
             case 0:
-                HowManyElementsNeedToOpen = 51; //51
+                HowManyElementsNeedToOpen = 60; //51
                 break;
             case 1:
                 HowManyElementsNeedToOpen = 36; //36
@@ -192,16 +193,16 @@ class Game extends BaseAdapter {
                 break;
         }
         for (int i = 0; i < 81; i++) {
-            userBaseMass[i] = 0;
-            blockedElements[i] = false;
+            mSudokuArray.setByIndexUserElement(i, 0);
+            mSudokuArray.setByIndexBlockElement(i, false);
         }
         while (HowManyElementsNeedToOpen != 0) {
             int randomField;
             Random random = new Random();
             randomField = random.nextInt(81);
-            if (userBaseMass[randomField] == 0) {
-                userBaseMass[randomField] = baseMass[randomField];
-                blockedElements[randomField] = true;
+            if (mSudokuArray.getByIndexUserElement(randomField) == 0) {
+                mSudokuArray.setByIndexUserElement(randomField, mSudokuArray.getByIndexBaseElement(randomField));
+                mSudokuArray.setByIndexBlockElement(randomField, true);
                 HowManyElementsNeedToOpen--;
             }
         }
@@ -215,9 +216,9 @@ class Game extends BaseAdapter {
         try {
             ContentValues contentValues = new ContentValues();
             for (int i = 0; i < 81; i++) {
-                contentValues.put(DBHelper.KEY_BM, baseMass[i]);
-                contentValues.put(DBHelper.KEY_USERBM, userBaseMass[i]);
-                if (blockedElements[i]) {
+                contentValues.put(DBHelper.KEY_BM, mSudokuArray.getByIndexBaseElement(i));
+                contentValues.put(DBHelper.KEY_USERBM, mSudokuArray.getByIndexUserElement(i));
+                if (mSudokuArray.getByIndexBlockElement(i)) {
                     contentValues.put(DBHelper.KEY_BLOCKED, 1);
                 } else contentValues.put(DBHelper.KEY_BLOCKED, 0);
                 database.insert(DBHelper.TABLE_DATA, null, contentValues);
@@ -240,13 +241,12 @@ class Game extends BaseAdapter {
             int ubmIndex = cursor.getColumnIndex(DBHelper.KEY_USERBM);
             int blockedIndex = cursor.getColumnIndex(DBHelper.KEY_BLOCKED);
             for (int i = 0; i < 81; i++) {
-                baseMass[i] = cursor.getInt(bmIndex);
-                userBaseMass[i] = cursor.getInt(ubmIndex);
-                if (cursor.getInt(blockedIndex) == 1) blockedElements[i] = true;
-                else blockedElements[i] = false;
+                mSudokuArray.setByIndexBaseElement(i, bmIndex);
+                mSudokuArray.setByIndexUserElement(i, cursor.getInt(ubmIndex));
+                if (cursor.getInt(blockedIndex) == 1) mSudokuArray.setByIndexBlockElement(i, true);
                 cursor.moveToNext();
             }
-        } else Log.i("DBError", "cursor.moveToFirst() == false");
+        } else Log.e("DBError", "cursor.moveToFirst() == false");
         cursor.close();
         dbHelper.close();
     }

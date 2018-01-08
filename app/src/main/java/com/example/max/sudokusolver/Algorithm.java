@@ -1,10 +1,16 @@
 package com.example.max.sudokusolver;
 
-import android.util.Log;
+import com.example.max.sudokusolver.sudoku_game.SudokuArray;
 
 public class Algorithm {
 
     private Integer[] massInt;
+    private SudokuArray mSudokuArray;
+
+    public Algorithm(){
+        mSudokuArray = SudokuArray.getInstance();
+    }
+
     public boolean solve(Integer[] puzzle) {
 
         int N = (int) Math.round(Math.pow(puzzle.length, 0.25d)); // length ^ 0.25
@@ -22,6 +28,7 @@ public class Algorithm {
         }
         if (noEmptyCells) {
             massInt = puzzle;
+            mSudokuArray.setBaseElementMass(puzzle);
             return true;
         }
 
@@ -45,6 +52,7 @@ public class Algorithm {
                 boolean solved = solve(puzzle);
                 if (solved) {
                     massInt = puzzle;
+                    mSudokuArray.setBaseElementMass(puzzle);
                     return true;
                 } else puzzle[myRow * SIZE + myCol] = 0;
             }
@@ -97,7 +105,8 @@ public class Algorithm {
                 if ((mass[startOfSquare + j2 + (j * 9)].equals(mass[i])) && (i != (startOfSquare + j2 + (j * 9))))
                     return false;
             }
-        } return true;
+        }
+        return true;
     }
 
 
