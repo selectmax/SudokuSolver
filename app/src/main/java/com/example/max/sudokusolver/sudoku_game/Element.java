@@ -2,6 +2,8 @@ package com.example.max.sudokusolver.sudoku_game;
 
 /**
  * Created by leonidtiskevic on 17.12.2017.
+ * Модель эелмента пользователя
+ * TODO: связать логику солвера с этой моделью
  */
 
 public class Element {
