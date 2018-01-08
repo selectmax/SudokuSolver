@@ -39,7 +39,8 @@ public class MenuActivity extends AppCompatActivity {
         levelOfDifficult = 1;
 
         mSudokuArray = SudokuArray.getInstance();
-        mProgressDialog = new ProgressDialog(this, R.style.AsyncTheme);
+       // mProgressDialog = new ProgressDialog(this, R.style.AsyncTheme);
+        mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
 
@@ -96,6 +97,7 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            mProgressDialog.setTitle(R.string.titleDialogAsync);
             mProgressDialog.show();
         }
 

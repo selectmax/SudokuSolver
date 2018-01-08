@@ -134,7 +134,7 @@ public class SudokuArray {
     }
 
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 35; //Показатель степени рандомности исходного поля. 0-80
+        final int COUNTER_FIRST_RANDOM_FILL = 25; //Показатель степени рандомности исходного поля. 0-80
         int filledCounter = 0;
         Algorithm algorithm = new Algorithm();
         for (int i = 0; i < 81; i++){
@@ -163,7 +163,7 @@ public class SudokuArray {
         byte HowManyElementsNeedToOpen = 51;
         switch (levelOfDifficult) {
             case 0:
-                HowManyElementsNeedToOpen = 60; //51
+                HowManyElementsNeedToOpen = 51; //51
                 break;
             case 1:
                 HowManyElementsNeedToOpen = 36; //36

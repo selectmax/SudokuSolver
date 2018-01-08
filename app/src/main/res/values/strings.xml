@@ -17,4 +17,5 @@
     <string name="title_congrats">Congratulations! Start a new game?</string>
     <string name="newgame">New Game</string>
     <string name="exit">Exit</string>
+    <string name="titleDialogAsync">Generating field...</string>
 </resources>

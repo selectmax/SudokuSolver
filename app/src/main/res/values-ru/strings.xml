@@ -18,4 +18,5 @@
     <string name="title_congrats">Поздравляем! Начать новую игру?</string>
     <string name="newgame">Новая игра</string>
     <string name="exit">Выход</string>
+    <string name="titleDialogAsync">Генерирую поле...</string>
 </resources>
