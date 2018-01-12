@@ -7,6 +7,7 @@
     <color name="backgroundColorSolver">#ACAACB</color>
     <color name="colorPrimarySolver">#535C90</color>
     <color name="colorPrimaruSolverDark">#39416D</color>
+    <color name="splash_background">#779AFF</color>
 
     <color name="transparent">#BBBBBB</color>
 </resources>

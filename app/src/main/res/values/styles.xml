@@ -8,39 +8,43 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
-    <style name = "CommonEditText">
-        <item name = "android:textSize">16sp</item>
-        <item name = "android:textStyle">bold</item>
-        <item name = "android:layout_width">0dp</item>
-        <item name = "android:layout_weight">1</item>
-        <item name = "android:layout_height">wrap_content</item>
-        <item name = "android:inputType">number</item>
-        <item name = "android:maxLength">1</item>
-        <item name = "android:gravity">center_horizontal</item>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
-    <style name = "RowOfEditText">
-        <item name = "android:layout_width">match_parent</item>
-        <item name = "android:layout_height">wrap_content</item>
-        <item name = "android:orientation">horizontal</item>
-        <item name = "android:paddingLeft">0dp</item>
-        <item name = "android:paddingRight">0dp</item>
+
+    <style name="CommonEditText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name = "ButtonStyle">
-        <item name = "android:layout_width">match_parent</item>
-        <item name = "android:layout_height">wrap_content</item>
-        <item name = "android:text">@string/push</item>
+    <style name="RowOfEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/push</item>
     </style>
 
     <style name="btn">
         <item name="android:width">10dp</item>
         <item name="android:height">50dp</item>
-        <item name = "android:layout_width">0dp</item>
-        <item name = "android:layout_weight">1</item>
-        <item name = "android:layout_height">wrap_content</item>
-        <item name = "android:background">#FFFFFF </item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
 
     <style name="AsyncTheme" parent="android:Theme.Holo.Dialog">
@@ -65,5 +69,14 @@
         <item name="android:topBright">@color/transparent</item>
         <item name="android:topDark">@color/transparent</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>
