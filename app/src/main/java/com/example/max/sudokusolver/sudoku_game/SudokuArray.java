@@ -34,7 +34,7 @@ public class SudokuArray {
      */
     private SudokuArray(){
         mElements = new ArrayList<>(81);
-        Element element = new Element(0, 0, false);
+        Element element = new Element(0, 0, false, false);
         for (int i = 0; i < 81; i++){
             mElements.add(i, element);
         }
@@ -84,10 +84,11 @@ public class SudokuArray {
      */
     public void setByIndexBaseElement(int index, int value){
        // mElements.get(index).setBaseElement(value);
-        Element element = new Element(0, 0, false);
+        Element element = new Element(0, 0, false, false);
         element.setUserElement(mElements.get(index).getUserElement());
         element.setBlockedElement(mElements.get(index).getBlockedElement());
         element.setBaseElement(value);
+        element.setIsCheckedElement(mElements.get(index).getIsCheckedElement());
         mElements.set(index, element);
     }
 
@@ -99,10 +100,11 @@ public class SudokuArray {
      */
     public void setByIndexBlockElement(int index, boolean value){
         //mElements.get(index).setBlockedElement(value);
-        Element element = new Element(0, 0, false);
+        Element element = new Element(0, 0, false, false);
         element.setBaseElement(mElements.get(index).getBaseElement());
         element.setUserElement(mElements.get(index).getUserElement());
         element.setBlockedElement(value);
+        element.setIsCheckedElement(mElements.get(index).getIsCheckedElement());
         mElements.set(index, element);
     }
 
@@ -114,15 +116,36 @@ public class SudokuArray {
      */
     public void setByIndexUserElement(int index, int value){
         //mElements.get(index).setUserElement(value);
-        Element element = new Element(0, 0, false);
+        Element element = new Element(0, 0, false, false);
         element.setBaseElement(mElements.get(index).getBaseElement());
         element.setBlockedElement(mElements.get(index).getBlockedElement());
         element.setUserElement(value);
+        element.setIsCheckedElement(mElements.get(index).getIsCheckedElement());
+        mElements.set(index, element);
+    }
+
+    public void setIsCheckedElement(int index, boolean isChecked){
+        Element element = new Element(0, 0, false, false);
+        element.setBaseElement(mElements.get(index).getBaseElement());
+        element.setBlockedElement(mElements.get(index).getBlockedElement());
+        element.setUserElement(mElements.get(index).getUserElement());
+        element.setIsCheckedElement(isChecked);
         mElements.set(index, element);
     }
 
     public int getByIndexBaseElement(int index){
         return mElements.get(index).getBaseElement();
+    }
+
+    /**
+     * Убирает метку выбранного элемента
+     */
+    public void clearCheckedElement(){
+        for (Element element: mElements) {
+            if (element.getIsCheckedElement()){
+                element.setIsCheckedElement(false);
+            }
+        }
     }
 
     public boolean getByIndexBlockElement(int index){
@@ -134,7 +157,7 @@ public class SudokuArray {
     }
 
     public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 25; //Показатель степени рандомности исходного поля. 0-80
+        final int COUNTER_FIRST_RANDOM_FILL = 10; //Показатель степени рандомности исходного поля. 0-80
         int filledCounter = 0;
         Algorithm algorithm = new Algorithm();
         for (int i = 0; i < 81; i++){

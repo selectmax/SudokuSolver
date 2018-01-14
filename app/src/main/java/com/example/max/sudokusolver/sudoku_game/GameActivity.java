@@ -17,6 +17,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Game mGame;
     private int positionSelected = 0;
     private int[] testStatus;
+    private SudokuArray mSudokuArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         boolean IsContinuation = intent.getBooleanExtra("Continue", false);
         setContentView(R.layout.activity_game);
         mGame = new Game(this);
+        mSudokuArray = SudokuArray.getInstance();
         getUIItems();
         setOnClickListener();
         gameGridView.setNumColumns(9);
@@ -41,10 +43,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
            //     mGame.initUserBaseMass(LevelOfDiffa);
            // }
 
+            /**
+             * TODO: те цифры какие ставит пользователь подсвечивать другим цветом, именно цифру
+             */
+
             gameGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     positionSelected = position;
+                    mSudokuArray.clearCheckedElement();
+                    mGame.isCheckedElement(position);
+                    mGame.notifyDataSetChanged();
                 }
             });
 

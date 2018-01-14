@@ -14,13 +14,16 @@ public class Element {
 
     private boolean blockedElement;
 
+    private boolean isCheckedElement;
+
     public Element() {
     }
 
-    public Element(Integer baseElement, Integer userElement, boolean blockedElement) {
+    public Element(Integer baseElement, Integer userElement, boolean blockedElement, boolean isCheckedElement) {
         this.baseElement = baseElement;
         this.userElement = userElement;
         this.blockedElement = blockedElement;
+        this.isCheckedElement = isCheckedElement;
     }
 
     public Integer getBaseElement() {
@@ -45,5 +48,13 @@ public class Element {
 
     public void setBlockedElement(boolean blockedElement) {
         this.blockedElement = blockedElement;
+    }
+
+    public boolean getIsCheckedElement() {
+        return isCheckedElement;
+    }
+
+    public void setIsCheckedElement(boolean checkedElement) {
+        isCheckedElement = checkedElement;
     }
 }

@@ -14,7 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
 
 import java.util.HashMap;
@@ -24,14 +23,20 @@ public class Game extends BaseAdapter {
 
     private SudokuArray mSudokuArray;
     private Context mContext;
-    private Algorithm mGameAlgorithm;
     private final int mRows = 9, mCols = 9;
-    public int HowManyTimesRunned = 0;
     private Map<Integer, Integer> mNubersMap;
     private LayoutInflater mLayoutInflater;
     DBHelper dbHelper;
     private byte lvl = 1;
+    private boolean isChecked = false;
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public Game(Context mContext) {
         this.mContext = mContext;
@@ -53,6 +58,10 @@ public class Game extends BaseAdapter {
         mNubersMap.put(7, R.drawable.o7);
         mNubersMap.put(8, R.drawable.o8);
         mNubersMap.put(9, R.drawable.o9);
+    }
+
+    public void isCheckedElement(int index){
+        mSudokuArray.getElements().get(index).setIsCheckedElement(true);
     }
 
     @Override
@@ -88,6 +97,12 @@ public class Game extends BaseAdapter {
             a = mNubersMap.get(mSudokuArray.getByIndexUserElement(position));
         }
         imageView.setImageResource(a);
+
+        if (mSudokuArray.getElements().get(position).getIsCheckedElement() &&
+                (mSudokuArray.getByIndexUserElement(position) == 0)){
+            imageView.setImageResource(R.drawable.podsvet);
+        }
+
 
         return view;
     }
