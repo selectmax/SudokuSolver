@@ -1,14 +1,18 @@
 package com.example.max.sudokusolver;
 
+import android.content.Context;
+
 import com.example.max.sudokusolver.sudoku_game.SudokuArray;
+
+import java.util.Random;
 
 public class Algorithm {
 
     private Integer[] massInt;
     private SudokuArray mSudokuArray;
 
-    public Algorithm(){
-        mSudokuArray = SudokuArray.getInstance();
+    public Algorithm(Context context){
+        mSudokuArray = SudokuArray.getInstance(context);
     }
 
     public boolean solve(Integer[] puzzle) {
@@ -116,6 +120,60 @@ public class Algorithm {
         if (start == 2 || start == 5 || start == 8) return (startOfSquare-18);
         else if (start == 1 || start == 4 || start == 7) return (startOfSquare-9);
         else return startOfSquare;
+    }
+
+    public void initArray() {
+        final int COUNTER_FIRST_RANDOM_FILL = 10; //Показатель степени рандомности исходного поля. 0-80
+        int filledCounter = 0;
+        for (int i = 0; i < 81; i++){
+            mSudokuArray.setByIndexBaseElement(i, 0);
+        }
+
+        while (filledCounter <= COUNTER_FIRST_RANDOM_FILL) {
+            int randomField;
+            int randomValue;
+            Random random = new Random();
+            randomField = random.nextInt(81);
+            randomValue = (random.nextInt(9) + 1);
+            if (mSudokuArray.getByIndexBaseElement(randomField) == 0) mSudokuArray.setByIndexBaseElement(randomField, randomValue);
+            boolean a = this.IsElementValid(mSudokuArray.getBaseElementMass(), randomField);
+            if (!a){
+                mSudokuArray.setByIndexBaseElement(randomField, 0);
+            } else filledCounter++;
+        }
+        if (!this.solve(mSudokuArray.getBaseElementMass())) {
+            initArray();
+        }
+    }
+
+    public void initUserBaseMass(Byte levelOfDifficult) {
+        // lvl = levelOfDifficult;
+        byte HowManyElementsNeedToOpen = 51;
+        switch (levelOfDifficult) {
+            case 0:
+                HowManyElementsNeedToOpen = 51; //51
+                break;
+            case 1:
+                HowManyElementsNeedToOpen = 36; //36
+                break;
+            case 2:
+                HowManyElementsNeedToOpen = 31; //31
+                break;
+        }
+        for (int i = 0; i < 81; i++) {
+            mSudokuArray.setByIndexUserElement(i, 0);
+            mSudokuArray.setByIndexBlockElement(i, false);
+        }
+        while (HowManyElementsNeedToOpen != 0) {
+            int randomField;
+            Random random = new Random();
+            randomField = random.nextInt(81);
+            if (mSudokuArray.getByIndexUserElement(randomField) == 0) {
+                mSudokuArray.setByIndexUserElement(randomField, mSudokuArray.getByIndexBaseElement(randomField));
+                mSudokuArray.setByIndexBlockElement(randomField, true);
+                HowManyElementsNeedToOpen--;
+            }
+        }
     }
 
     public Integer[] getMassInt() {

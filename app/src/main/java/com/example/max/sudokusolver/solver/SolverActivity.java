@@ -37,7 +37,7 @@ public class SolverActivity extends AppCompatActivity implements View.OnClickLis
         setOnClickListener();
         initArray();
 
-        mAlgorithm = new Algorithm();
+        mAlgorithm = new Algorithm(this);
         mAdapterSolver = new AdapterSolver(this, massSolved);
 
         initGridView();
