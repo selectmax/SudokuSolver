@@ -138,7 +138,7 @@ public class Game extends BaseAdapter {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mAlgorithm.initArray();
-                mSudokuArray.initUserBaseMass(lvl);
+                mAlgorithm.initUserBaseMass(lvl);
             }
         });
 

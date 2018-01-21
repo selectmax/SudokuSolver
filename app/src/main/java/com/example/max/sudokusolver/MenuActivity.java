@@ -108,7 +108,7 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             mAlgorithm.initArray();
-            mSudokuArray.initUserBaseMass(levelOfDifficult);
+            mAlgorithm.initUserBaseMass(levelOfDifficult);
             return null;
         }
 

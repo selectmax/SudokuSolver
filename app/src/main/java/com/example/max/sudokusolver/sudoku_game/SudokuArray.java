@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * singleton который хранит массив на протяжении всей работы приложения в единственном экземпляре
@@ -162,37 +161,6 @@ public class SudokuArray {
 
     public int getByIndexUserElement(int index){
         return mElements.get(index).getUserElement();
-    }
-
-
-    public void initUserBaseMass(Byte levelOfDifficult) {
-       // lvl = levelOfDifficult;
-        byte HowManyElementsNeedToOpen = 51;
-        switch (levelOfDifficult) {
-            case 0:
-                HowManyElementsNeedToOpen = 51; //51
-                break;
-            case 1:
-                HowManyElementsNeedToOpen = 36; //36
-                break;
-            case 2:
-                HowManyElementsNeedToOpen = 31; //31
-                break;
-        }
-        for (int i = 0; i < 81; i++) {
-            this.setByIndexUserElement(i, 0);
-            this.setByIndexBlockElement(i, false);
-        }
-        while (HowManyElementsNeedToOpen != 0) {
-            int randomField;
-            Random random = new Random();
-            randomField = random.nextInt(81);
-            if (this.getByIndexUserElement(randomField) == 0) {
-                this.setByIndexUserElement(randomField, this.getByIndexBaseElement(randomField));
-                this.setByIndexBlockElement(randomField, true);
-                HowManyElementsNeedToOpen--;
-            }
-        }
     }
 
     public void saveDB(){
