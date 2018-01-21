@@ -16,7 +16,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Game mGame;
     private int positionSelected = 0;
-    private int[] testStatus;
     private SudokuArray mSudokuArray;
 
     @Override
@@ -28,7 +27,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         boolean IsContinuation = intent.getBooleanExtra("Continue", false);
         setContentView(R.layout.activity_game);
         mGame = new Game(this);
-        mSudokuArray = SudokuArray.getInstance();
+        mSudokuArray = SudokuArray.getInstance(this);
         getUIItems();
         setOnClickListener();
         gameGridView.setNumColumns(9);
@@ -36,7 +35,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGridView.setAdapter(mGame);
 
         if (IsContinuation) {
-            mGame.loadDB();
+            mSudokuArray.loadDB();
         } else { //new game
            // mGame.initArray();
            // for (Byte LevelOfDiffa : LevelOfDiff) {
@@ -120,7 +119,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onStop() {
-        mGame.saveDB();
+        mSudokuArray.saveDB();
         super.onStop();
     }
 }

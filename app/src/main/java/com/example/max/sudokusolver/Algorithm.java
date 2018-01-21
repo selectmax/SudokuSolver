@@ -1,14 +1,18 @@
 package com.example.max.sudokusolver;
 
+import android.content.Context;
+
 import com.example.max.sudokusolver.sudoku_game.SudokuArray;
+
+import java.util.Random;
 
 public class Algorithm {
 
     private Integer[] massInt;
     private SudokuArray mSudokuArray;
 
-    public Algorithm(){
-        mSudokuArray = SudokuArray.getInstance();
+    public Algorithm(Context context){
+        mSudokuArray = SudokuArray.getInstance(context);
     }
 
     public boolean solve(Integer[] puzzle) {
@@ -116,6 +120,30 @@ public class Algorithm {
         if (start == 2 || start == 5 || start == 8) return (startOfSquare-18);
         else if (start == 1 || start == 4 || start == 7) return (startOfSquare-9);
         else return startOfSquare;
+    }
+
+    public void initArray() {
+        final int COUNTER_FIRST_RANDOM_FILL = 10; //Показатель степени рандомности исходного поля. 0-80
+        int filledCounter = 0;
+        for (int i = 0; i < 81; i++){
+            mSudokuArray.setByIndexBaseElement(i, 0);
+        }
+
+        while (filledCounter <= COUNTER_FIRST_RANDOM_FILL) {
+            int randomField;
+            int randomValue;
+            Random random = new Random();
+            randomField = random.nextInt(81);
+            randomValue = (random.nextInt(9) + 1);
+            if (mSudokuArray.getByIndexBaseElement(randomField) == 0) mSudokuArray.setByIndexBaseElement(randomField, randomValue);
+            boolean a = this.IsElementValid(mSudokuArray.getBaseElementMass(), randomField);
+            if (!a){
+                mSudokuArray.setByIndexBaseElement(randomField, 0);
+            } else filledCounter++;
+        }
+        if (!this.solve(mSudokuArray.getBaseElementMass())) {
+            initArray();
+        }
     }
 
     public Integer[] getMassInt() {

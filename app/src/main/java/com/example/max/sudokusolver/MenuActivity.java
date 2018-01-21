@@ -23,6 +23,7 @@ public class MenuActivity extends AppCompatActivity {
     private Spinner spinner;
     private byte levelOfDifficult;
     private SudokuArray mSudokuArray;
+    private Algorithm mAlgorithm;
     private ProgressDialog mProgressDialog;
     private InitializeArray mInitializeArray;
 
@@ -40,8 +41,9 @@ public class MenuActivity extends AppCompatActivity {
         spinner.setSelection(1);
         levelOfDifficult = 1;
         mInitializeArray = new InitializeArray();
+        mAlgorithm = new Algorithm(this);
 
-        mSudokuArray = SudokuArray.getInstance();
+        mSudokuArray = SudokuArray.getInstance(this);
        // mProgressDialog = new ProgressDialog(this, R.style.AsyncTheme);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
@@ -105,7 +107,7 @@ public class MenuActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mSudokuArray.initArray();
+            mAlgorithm.initArray();
             mSudokuArray.initUserBaseMass(levelOfDifficult);
             return null;
         }

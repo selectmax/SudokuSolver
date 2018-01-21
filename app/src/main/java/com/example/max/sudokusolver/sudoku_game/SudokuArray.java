@@ -1,6 +1,10 @@
 package com.example.max.sudokusolver.sudoku_game;
 
-import com.example.max.sudokusolver.Algorithm;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +20,17 @@ public class SudokuArray {
     private static SudokuArray sSudokuArray;
 
     private List<Element> mElements;
+    private Context mContext;
+    private DBHelper dbHelper;
 
     /**
      * метод для получения объекта класса, через new нельзя объект получить
      * только через SudokuArray array = SudokuArray.getInstance();
      * @return экземпляр класса SudokuArray
      */
-    public static SudokuArray getInstance(){
+    public static SudokuArray getInstance(Context context){
         if (sSudokuArray == null){
-            sSudokuArray = new SudokuArray();
+            sSudokuArray = new SudokuArray(context);
         }
         return sSudokuArray;
     }
@@ -32,8 +38,10 @@ public class SudokuArray {
     /**
      * конструкторе при первой инициализации собирается массив
      */
-    private SudokuArray(){
+    private SudokuArray(Context context){
+        mContext = context.getApplicationContext();
         mElements = new ArrayList<>(81);
+        dbHelper = new DBHelper(this.mContext);
         Element element = new Element(0, 0, false, false);
         for (int i = 0; i < 81; i++){
             mElements.add(i, element);
@@ -156,30 +164,6 @@ public class SudokuArray {
         return mElements.get(index).getUserElement();
     }
 
-    public void initArray() {
-        final int COUNTER_FIRST_RANDOM_FILL = 10; //Показатель степени рандомности исходного поля. 0-80
-        int filledCounter = 0;
-        Algorithm algorithm = new Algorithm();
-        for (int i = 0; i < 81; i++){
-            this.setByIndexBaseElement(i, 0);
-        }
-
-        while (filledCounter <= COUNTER_FIRST_RANDOM_FILL) {
-            int randomField;
-            int randomValue;
-            Random random = new Random();
-            randomField = random.nextInt(81);
-            randomValue = (random.nextInt(9) + 1);
-            if (this.getByIndexBaseElement(randomField) == 0) this.setByIndexBaseElement(randomField, randomValue);
-            boolean a = algorithm.IsElementValid(this.getBaseElementMass(), randomField);
-            if (!a){
-                this.setByIndexBaseElement(randomField, 0);
-            } else filledCounter++;
-        }
-        if (!algorithm.solve(this.getBaseElementMass())) {
-            initArray();
-        }
-    }
 
     public void initUserBaseMass(Byte levelOfDifficult) {
        // lvl = levelOfDifficult;
@@ -209,5 +193,48 @@ public class SudokuArray {
                 HowManyElementsNeedToOpen--;
             }
         }
+    }
+
+    public void saveDB(){
+        long startTime = System.currentTimeMillis();
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        database.delete(DBHelper.TABLE_DATA, null, null);
+        database.beginTransaction();
+        try {
+            ContentValues contentValues = new ContentValues();
+            for (int i = 0; i < 81; i++) {
+                contentValues.put(DBHelper.KEY_BM, this.getByIndexBaseElement(i));
+                contentValues.put(DBHelper.KEY_USERBM, this.getByIndexUserElement(i));
+                if (this.getByIndexBlockElement(i)) {
+                    contentValues.put(DBHelper.KEY_BLOCKED, 1);
+                } else contentValues.put(DBHelper.KEY_BLOCKED, 0);
+                database.insert(DBHelper.TABLE_DATA, null, contentValues);
+            }
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+        dbHelper.close();
+        long diff = System. currentTimeMillis() - startTime;
+        Log.i("Time", "Time of save to DB = " + diff);
+    }
+
+    public void loadDB(){
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(DBHelper.TABLE_DATA, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
+            int bmIndex = cursor.getColumnIndex(DBHelper.KEY_BM);
+            int ubmIndex = cursor.getColumnIndex(DBHelper.KEY_USERBM);
+            int blockedIndex = cursor.getColumnIndex(DBHelper.KEY_BLOCKED);
+            for (int i = 0; i < 81; i++) {
+                this.setByIndexBaseElement(i, bmIndex);
+                this.setByIndexUserElement(i, cursor.getInt(ubmIndex));
+                if (cursor.getInt(blockedIndex) == 1) this.setByIndexBlockElement(i, true);
+                cursor.moveToNext();
+            }
+        } else Log.e("DBError", "cursor.moveToFirst() == false");
+        cursor.close();
+        dbHelper.close();
     }
 }

@@ -1,11 +1,8 @@
 package com.example.max.sudokusolver.sudoku_game;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
 
 import java.util.HashMap;
@@ -26,7 +24,7 @@ public class Game extends BaseAdapter {
     private final int mRows = 9, mCols = 9;
     private Map<Integer, Integer> mNubersMap;
     private LayoutInflater mLayoutInflater;
-    DBHelper dbHelper;
+    private Algorithm mAlgorithm;
     private byte lvl = 1;
     private boolean isChecked = false;
 
@@ -42,9 +40,9 @@ public class Game extends BaseAdapter {
         this.mContext = mContext;
         mNubersMap = new HashMap<>();
         mLayoutInflater = LayoutInflater.from(mContext);
-        mSudokuArray = SudokuArray.getInstance();
+        mSudokuArray = SudokuArray.getInstance(mContext);
+        mAlgorithm = new Algorithm(mContext);
         initNumbersMap();
-        dbHelper = new DBHelper(this.mContext);
     }
 
     private void initNumbersMap(){
@@ -139,7 +137,7 @@ public class Game extends BaseAdapter {
         congratsDialog.setPositiveButton(R.string.newgame, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mSudokuArray.initArray();
+                mAlgorithm.initArray();
                 mSudokuArray.initUserBaseMass(lvl);
             }
         });
@@ -158,48 +156,5 @@ public class Game extends BaseAdapter {
                 return false;
         }
         return true;
-    }
-
-    public void saveDB(){
-        long startTime = System.currentTimeMillis();
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        database.delete(DBHelper.TABLE_DATA, null, null);
-        database.beginTransaction();
-        try {
-            ContentValues contentValues = new ContentValues();
-            for (int i = 0; i < 81; i++) {
-                contentValues.put(DBHelper.KEY_BM, mSudokuArray.getByIndexBaseElement(i));
-                contentValues.put(DBHelper.KEY_USERBM, mSudokuArray.getByIndexUserElement(i));
-                if (mSudokuArray.getByIndexBlockElement(i)) {
-                    contentValues.put(DBHelper.KEY_BLOCKED, 1);
-                } else contentValues.put(DBHelper.KEY_BLOCKED, 0);
-                database.insert(DBHelper.TABLE_DATA, null, contentValues);
-            }
-            database.setTransactionSuccessful();
-        } finally {
-            database.endTransaction();
-        }
-        dbHelper.close();
-        long diff = System. currentTimeMillis() - startTime;
-        Log.i("Time", "Time of save to DB = " + diff);
-    }
-
-    public void loadDB(){
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.query(DBHelper.TABLE_DATA, null, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
-            int bmIndex = cursor.getColumnIndex(DBHelper.KEY_BM);
-            int ubmIndex = cursor.getColumnIndex(DBHelper.KEY_USERBM);
-            int blockedIndex = cursor.getColumnIndex(DBHelper.KEY_BLOCKED);
-            for (int i = 0; i < 81; i++) {
-                mSudokuArray.setByIndexBaseElement(i, bmIndex);
-                mSudokuArray.setByIndexUserElement(i, cursor.getInt(ubmIndex));
-                if (cursor.getInt(blockedIndex) == 1) mSudokuArray.setByIndexBlockElement(i, true);
-                cursor.moveToNext();
-            }
-        } else Log.e("DBError", "cursor.moveToFirst() == false");
-        cursor.close();
-        dbHelper.close();
     }
 }
