@@ -61,10 +61,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mDeleteItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (! mSudokuArray.getElements().get(positionSelected).getBlockedElement()) {
+                if (!mSudokuArray.getElements().get(positionSelected).getBlockedElement()) {
                     mSudokuArray.getElements().get(positionSelected).setUserElement(0);
+                    mGame.notifyDataSetChanged();
                 }
-                mGame.notifyDataSetChanged();
             }
         });
     }
