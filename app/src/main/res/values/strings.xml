@@ -19,4 +19,5 @@
     <string name="exit">Exit</string>
     <string name="titleDialogAsync">Generating field...</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="text_for_hepl_toast">Please, select empty item</string>
 </resources>

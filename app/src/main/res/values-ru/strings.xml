@@ -19,4 +19,5 @@
     <string name="newgame">Новая игра</string>
     <string name="exit">Выход</string>
     <string name="titleDialogAsync">Генерирую поле...</string>
+    <string name="text_for_hepl_toast">Пожалуйста, выберите пустую ячейку</string>
 </resources>

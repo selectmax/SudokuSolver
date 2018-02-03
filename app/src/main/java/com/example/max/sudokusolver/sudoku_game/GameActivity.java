@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.max.sudokusolver.R;
 
@@ -14,7 +15,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private GridView gameGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
-    private Button mDeleteItemButton;
+    private Button mDeleteItemButton, mHelpButton;
     private Game mGame;
     private int positionSelected = 0;
     private SudokuArray mSudokuArray;
@@ -67,11 +68,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+        mHelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (positionSelected == 0 || mSudokuArray.getElements().get(positionSelected).getUserElement() != 0){
+                    Toast.makeText(GameActivity.this, R.string.text_for_hepl_toast, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mSudokuArray.getElements().get(positionSelected)
+                        .setUserElement(mSudokuArray.getElements().get(positionSelected).getBaseElement());
+                mGame.notifyDataSetChanged();
+            }
+        });
     }
 
     private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
         mDeleteItemButton = (Button) findViewById(R.id.delete_item_btn);
+        mHelpButton = (Button) findViewById(R.id.help_button);
         btn1 = (Button) findViewById(R.id.game_btn1);
         btn2 = (Button) findViewById(R.id.game_btn2);
         btn3 = (Button) findViewById(R.id.game_btn3);

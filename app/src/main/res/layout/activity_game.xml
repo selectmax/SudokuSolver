@@ -7,6 +7,30 @@
     android:background="@color/backgroundColorSolver"
     >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/help_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_help_button"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:orientation="vertical"
+        >
+
+    </LinearLayout>
+
     <GridView
         android:layout_height="351dp"
         android:layout_width="wrap_content"
@@ -24,15 +48,16 @@
 
         <LinearLayout
             android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:orientation="vertical">
 
         </LinearLayout>
 
         <Button
             android:id="@+id/delete_item_btn"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/ic_action_name"
             />
 
