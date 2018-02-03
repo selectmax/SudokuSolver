@@ -20,4 +20,5 @@
     <string name="titleDialogAsync">Generating field...</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="text_for_hepl_toast">Please, select empty item</string>
+    <string name="cansel_item_button_text">cansel</string>
 </resources>

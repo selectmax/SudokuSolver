@@ -14,7 +14,9 @@ import android.widget.Toast;
 import com.example.max.sudokusolver.Algorithm;
 import com.example.max.sudokusolver.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Game extends BaseAdapter {
@@ -25,6 +27,7 @@ public class Game extends BaseAdapter {
     private Map<Integer, Integer> mNubersMap;
     private LayoutInflater mLayoutInflater;
     private Algorithm mAlgorithm;
+    private List<ElementForCache> mCacheList;
     private byte lvl = 1;
     private boolean isChecked = false;
 
@@ -39,6 +42,7 @@ public class Game extends BaseAdapter {
     public Game(Context mContext) {
         this.mContext = mContext;
         mNubersMap = new HashMap<>();
+        mCacheList = new ArrayList<>();
         mLayoutInflater = LayoutInflater.from(mContext);
         mSudokuArray = SudokuArray.getInstance(mContext);
         mAlgorithm = new Algorithm(mContext);
@@ -60,6 +64,13 @@ public class Game extends BaseAdapter {
 
     public void isCheckedElement(int index){
         mSudokuArray.getElements().get(index).setIsCheckedElement(true);
+    }
+
+    public void returnElement(){
+        mSudokuArray.getElements().get(mCacheList.get(mCacheList.size() - 1).getIndex())
+                .setUserElement(mCacheList.get(mCacheList.size() - 1).getValue());
+        mCacheList.remove(mCacheList.size() - 1);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -117,6 +128,7 @@ public class Game extends BaseAdapter {
     public void setItem(int positionSelected, int i) {
         if (!mSudokuArray.getByIndexBlockElement(positionSelected)) {
             mSudokuArray.setByIndexUserElement(positionSelected, i);
+            mCacheList.add(new ElementForCache(positionSelected, i));
             Log.i("MyTag", "Число изменено");
             if (mSudokuArray.getByIndexUserElement(positionSelected) != mSudokuArray.getByIndexBaseElement(positionSelected)) {
                 Log.i("MyTag", "Элемент не валидный");

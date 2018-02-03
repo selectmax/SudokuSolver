@@ -15,7 +15,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private GridView gameGridView;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
-    private Button mDeleteItemButton, mHelpButton;
+    private Button mDeleteItemButton, mHelpButton, mBackwordBtn;
     private Game mGame;
     private int positionSelected = 0;
     private SudokuArray mSudokuArray;
@@ -81,12 +81,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 mGame.notifyDataSetChanged();
             }
         });
+
+        mBackwordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGame.returnElement();
+            }
+        });
     }
 
     private void getUIItems() {
         gameGridView = (GridView) findViewById(R.id.game_field);
         mDeleteItemButton = (Button) findViewById(R.id.delete_item_btn);
         mHelpButton = (Button) findViewById(R.id.help_button);
+        mBackwordBtn = (Button) findViewById(R.id.backward_button);
         btn1 = (Button) findViewById(R.id.game_btn1);
         btn2 = (Button) findViewById(R.id.game_btn2);
         btn3 = (Button) findViewById(R.id.game_btn3);
