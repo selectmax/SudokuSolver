@@ -82,12 +82,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        mBackwordBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGame.returnElement();
-            }
-        });
     }
 
     private void getUIItems() {

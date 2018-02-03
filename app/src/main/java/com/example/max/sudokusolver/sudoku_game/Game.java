@@ -66,13 +66,6 @@ public class Game extends BaseAdapter {
         mSudokuArray.getElements().get(index).setIsCheckedElement(true);
     }
 
-    public void returnElement(){
-        mSudokuArray.getElements().get(mCacheList.get(mCacheList.size() - 1).getIndex())
-                .setUserElement(mCacheList.get(mCacheList.size() - 1).getValue());
-        mCacheList.remove(mCacheList.size() - 1);
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getCount() {
         return mRows * mCols;
