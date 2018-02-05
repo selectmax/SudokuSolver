@@ -1,8 +1,8 @@
-package com.example.max.sudokusolver;
+package com.dev.games.sudoku;
 
 import android.content.Context;
 
-import com.example.max.sudokusolver.sudoku_game.SudokuArray;
+import com.dev.games.sudoku.sudoku_game.SudokuArray;
 
 import java.util.Random;
 

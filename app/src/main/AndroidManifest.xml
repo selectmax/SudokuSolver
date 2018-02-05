@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name="com.dev.games.sudoku.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,15 +19,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".sudoku_game.GameActivity"
+            android:name="com.dev.games.sudoku.sudoku_game.GameActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".solver.SolverActivity"
+            android:name="com.dev.games.sudoku.solver.SolverActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name="com.dev.games.sudoku.MenuActivity"
             android:screenOrientation="portrait">
         </activity>
     </application>

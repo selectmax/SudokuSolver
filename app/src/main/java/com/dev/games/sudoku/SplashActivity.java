@@ -1,10 +1,10 @@
-package com.example.max.sudokusolver;
+package com.dev.games.sudoku;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.max.sudokusolver.sudoku_game.SudokuArray;
+import com.dev.games.sudoku.sudoku_game.SudokuArray;
 
 public class SplashActivity extends AppCompatActivity {
 

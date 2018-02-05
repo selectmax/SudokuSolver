@@ -1,4 +1,4 @@
-package com.example.max.sudokusolver.sudoku_game;
+package com.dev.games.sudoku.sudoku_game;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,8 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.max.sudokusolver.Algorithm;
-import com.example.max.sudokusolver.R;
+import com.dev.games.sudoku.Algorithm;
+import com.example.max.sudoku.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

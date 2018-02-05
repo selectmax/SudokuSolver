@@ -1,4 +1,4 @@
-package com.example.max.sudokusolver.sudoku_game;
+package com.dev.games.sudoku.sudoku_game;
 
 /**
  * Created by leonidtiskevic on 17.12.2017.

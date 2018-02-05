@@ -1,4 +1,4 @@
-package com.example.max.sudokusolver;
+package com.dev.games.sudoku;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,9 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.max.sudokusolver.solver.SolverActivity;
-import com.example.max.sudokusolver.sudoku_game.GameActivity;
-import com.example.max.sudokusolver.sudoku_game.SudokuArray;
+import com.dev.games.sudoku.sudoku_game.GameActivity;
+import com.dev.games.sudoku.solver.SolverActivity;
+import com.dev.games.sudoku.sudoku_game.SudokuArray;
 
 public class MenuActivity extends AppCompatActivity {
 

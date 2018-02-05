@@ -1,4 +1,4 @@
-package com.example.max.sudokusolver.solver;
+package com.dev.games.sudoku.solver;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.max.sudokusolver.Algorithm;
-import com.example.max.sudokusolver.R;
-import com.example.max.sudokusolver.solver.adapter.AdapterSolver;
+import com.dev.games.sudoku.Algorithm;
+import com.dev.games.sudoku.solver.adapter.AdapterSolver;
+import com.example.max.sudoku.R;
 
 public class SolverActivity extends AppCompatActivity implements View.OnClickListener {
 

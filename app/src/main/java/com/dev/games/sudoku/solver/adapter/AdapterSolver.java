@@ -1,4 +1,4 @@
-package com.example.max.sudokusolver.solver.adapter;
+package com.dev.games.sudoku.solver.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.example.max.sudokusolver.R;
+import com.example.max.sudoku.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

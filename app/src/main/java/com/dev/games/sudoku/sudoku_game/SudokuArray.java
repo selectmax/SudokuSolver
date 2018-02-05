@@ -1,4 +1,4 @@
-package com.example.max.sudokusolver.sudoku_game;
+package com.dev.games.sudoku.sudoku_game;
 
 import android.content.ContentValues;
 import android.content.Context;
